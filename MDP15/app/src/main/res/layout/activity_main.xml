@@ -21,12 +21,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:layout_width="400dp"
-            android:layout_height="600dp"
-            android:text="Box"
-            android:layout_centerHorizontal="true">
-        </Button>
+        <include layout="@layout/maze_layout"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
