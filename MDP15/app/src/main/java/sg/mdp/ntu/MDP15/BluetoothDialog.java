@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -244,5 +245,9 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
     public void startBTConnection(BluetoothDevice device, UUID uuid){
         mBluetoothConnection.startClient(device,uuid);
+    }
+
+    public void senddata(String msg){
+        mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
     }
 }

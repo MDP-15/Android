@@ -20,7 +20,7 @@
             android:id="@+id/tbRobotStatus"
             android:layout_centerHorizontal="true"
             android:text="Status: Nothing"
-            ></TextView>
+            />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,18 +39,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Start Point"
-            android:layout_toLeftOf="@id/btnSetEndPoint"></Button>
+            android:id="@+id/btnSetStartPoint"
+            android:layout_toLeftOf="@id/btnSetEndPoint"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Start Point"
             android:layout_centerHorizontal="true"
-            android:id="@+id/btnSetEndPoint"></Button>
+            android:id="@+id/btnSetEndPoint"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Start Point"
-            android:layout_toRightOf="@id/btnSetEndPoint"></Button>
+            android:layout_toRightOf="@id/btnSetEndPoint"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -69,17 +70,44 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Map Settings Placeholder"></TextView>
+                    android:text="Map Settings Placeholder"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:paddingTop="100dp">
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BUTTONS Placeholder"></TextView>
+                    android:text="Up"
+                    android:onClick="up"
+                    android:id="@+id/btnUP"
+                    android:layout_centerHorizontal="true"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Down"
+                    android:onClick="down"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/btnUP"
+                    android:id="@+id/btnDown"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Left"
+                    android:layout_marginTop="25dp"
+                    android:onClick="left"
+                    android:layout_toLeftOf="@id/btnUP"
+                    android:id="@+id/btnLeft"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:onClick="right"
+                    android:text="Right"
+                    android:layout_toRightOf="@id/btnUP"
+                    android:id="@+id/btnRight"/>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
