@@ -9,16 +9,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
+    BluetoothDialog btDialog;
     private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Toolbar
         toolbar = (Toolbar)findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
+
 
     }
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openBluetooth(MenuItem item){
-        BluetoothDialog btDialog = new BluetoothDialog();
+        btDialog = new BluetoothDialog();
         btDialog.show(getSupportFragmentManager(),"Bluetooth");
     }
 
@@ -39,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
         ReconfigureDialog rfDialog = new ReconfigureDialog();
         rfDialog.show(getSupportFragmentManager(),"Reconfigure");
     }
+    
 }

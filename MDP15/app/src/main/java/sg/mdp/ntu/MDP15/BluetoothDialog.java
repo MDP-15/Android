@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,11 +24,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.content.ContextCompat;
 
 public class BluetoothDialog extends AppCompatDialogFragment {
+    private static final UUID mdpUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private EditText editusername;
     private EditText editpassword;
@@ -36,6 +39,8 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     ListView lvNewDevices;
     public DeviceListAdapter mDeviceListAdapter;
+    BluetoothDevice mBTDevice;
+    BluetoothConnectionService mBluetoothConnection;
 
     Button btnONOFF;
     Button btnScan;
@@ -60,6 +65,52 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         });
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
+        lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mBluetoothAdapter.cancelDiscovery();
+                //tvStatus.setText("Status Nothing");
+                btnScan.setText("Scan");
+
+                Log.d(TAG,"onItemClick: You clicked on a device");
+                String deviceName = mBTDevices.get(position).getName();
+                String deviceAddress = mBTDevices.get(position).getAddress();
+
+                Log.d(TAG,"onItemClick: Device Name: "+deviceName);
+                Log.d(TAG,"onItemClick: Device Address: "+deviceAddress);
+
+                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
+                    Log.d(TAG,"Trying to pair with "+deviceName);
+                    mBTDevices.get(position).createBond();
+                    mBTDevice = mBTDevices.get(position);
+
+//            mDeviceUUIDs = mBTDevice.getUuids();
+//            for(int i = 0; i < mDeviceUUIDs.length; i++){
+//                System.out.println(mDeviceUUIDs[i].toString());
+//            }
+
+
+                    mBluetoothConnection = new BluetoothConnectionService(getActivity());
+                    if(mBTDevices.get(position).getBondState() == BluetoothDevice.BOND_BONDING){
+                        // tvStatus.setText("Pairing");
+                        Log.d(TAG,"BroadcastReceiver4: Pairing");
+                    }
+                    if(mBTDevices.get(position).getBondState() == BluetoothDevice.BOND_NONE){
+                        Log.d(TAG,"BroadcastReceiver4: No Pair");
+                    }
+                    if(mBTDevices.get(position).getBondState() == BluetoothDevice.BOND_BONDED){
+                        // tvStatus.setText("Paired but not connected");
+                        Log.d(TAG,"BroadcastReceiver4: Paired");
+                        Log.d(TAG,"Connection Codes should come here");
+                        startBTConnection(mBTDevice,mdpUUID);
+                        Toast.makeText(getActivity(),"Connected with "+deviceName,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+
+
         btnScan = (Button)view.findViewById(R.id.btnDiscover);
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +164,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         }
     }
 
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+    public final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(mBluetoothAdapter.ACTION_STATE_CHANGED)) {
@@ -160,7 +211,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         //tvStatus.setText("Status:Nothing");
     }
 
-    private BroadcastReceiver receiver3 = new BroadcastReceiver() {
+    public BroadcastReceiver receiver3 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -191,10 +242,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // Don't forget to unregister the ACTION_FOUND receiver.
-        requireActivity().unregisterReceiver(receiver);
+    public void startBTConnection(BluetoothDevice device, UUID uuid){
+        mBluetoothConnection.startClient(device,uuid);
     }
 }
