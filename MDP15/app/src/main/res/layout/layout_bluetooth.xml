@@ -34,7 +34,8 @@
         android:layout_below="@id/btnONOFF"
         android:text="Scan"
         android:background="#6095FE"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="300dp"
