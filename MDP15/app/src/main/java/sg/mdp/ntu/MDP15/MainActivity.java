@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.nio.charset.Charset;
 
@@ -16,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
     BluetoothDialog btDialog;
     private Toolbar toolbar;
     Button btnSetStartPoint;
-    Button btnUP;
-    Button btnDown;
-    Button btnLeft;
-    Button btnRight;
+    ImageButton btnUP;
+    ImageButton btnDown;
+    ImageButton btnLeft;
+    ImageButton btnRight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

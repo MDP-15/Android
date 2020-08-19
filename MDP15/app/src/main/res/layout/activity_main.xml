@@ -150,29 +150,32 @@
                 android:layout_weight="3"
                 android:paddingTop="50dp"
                 android:paddingBottom="20dp">
-                <Button
+                <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:text="Up"
                     android:onClick="up"
                     android:id="@+id/btnUP"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_forward"
                     android:textColor="#FFFFFF"
-                    android:layout_marginBottom="25dp"/>
-                <Button
+                    />
+                <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:text="Down"
                     android:onClick="down"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/btnLeft"
                     android:layout_marginTop="100dp"
                     android:id="@+id/btnDown"
                     android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_reverse"
+                    android:layout_marginBottom="10dp"
                     android:textColor="#FFFFFF"
                     />
-                <Button
+                <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="Left"
@@ -181,13 +184,16 @@
                     android:layout_toLeftOf="@id/btnUP"
                     android:id="@+id/btnLeft"
                     android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_rl"
                     android:textColor="#FFFFFF"/>
-                <Button
+                <ImageButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="50dp"
+                    android:elevation="3dp"
                     android:onClick="right"
-                    android:text="Right"
+                    android:src="@drawable/arrow_rr"
                     android:layout_toRightOf="@id/btnUP"
                     android:id="@+id/btnRight"
                     android:background="@drawable/circle_button"
