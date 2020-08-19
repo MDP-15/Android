@@ -2129,7 +2129,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/border"
-                app:srcCompat="@android:color/transparent" />
+                app:srcCompat="@drawable/waypoint" />
         </RelativeLayout>
 
 
