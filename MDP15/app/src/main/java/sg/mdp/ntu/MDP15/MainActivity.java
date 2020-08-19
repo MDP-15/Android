@@ -3,13 +3,24 @@ package sg.mdp.ntu.MDP15;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.nio.charset.Charset;
 
@@ -21,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnDown;
     ImageButton btnLeft;
     ImageButton btnRight;
+    TextView tvStatus;
+    private boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        connected = false;
         btDialog = new BluetoothDialog();
         setContentView(R.layout.activity_main);
         //Toolbar
@@ -42,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
         btnDown = findViewById(R.id.btnDown);
         btnLeft = findViewById(R.id.btnLeft);
         btnRight = findViewById(R.id.btnRight);
+
+        tvStatus = findViewById(R.id.tbRobotStatus);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        this.registerReceiver(broadcastReceiver, filter);
+
+
 
     }
 
@@ -63,16 +87,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void up(View v){
-        btDialog.senddata("f");
+        if( connected){
+            btDialog.senddata("f");
+        }
     }
     public void down(View v){
-        btDialog.senddata("r");
+        if( connected){
+            btDialog.senddata("f");
+        }
     }
     public void left(View v){
-        btDialog.senddata("tl");
+        if( connected){
+            btDialog.senddata("f");
+        }
     }
     public void right(View v){
-        btDialog.senddata("tr");
+        if( connected){
+            btDialog.senddata("f");
+        }
     }
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        BluetoothDevice device;
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                Toast.makeText(getApplicationContext(), "Device is now Connected",    Toast.LENGTH_SHORT).show();
+                connected = true;
+                tvStatus.setText("Bluetooth is connected");
+            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
+                connected = false;
+                tvStatus.setText("Bluetooth died");
+            }
+        }
+    };
 
 }

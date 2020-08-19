@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class BluetoothConnectionService {
     private static final String TAG = "BluetoothConnectionService";
     private static final String appName = "MYAPP";
-    private Handler handler; // handler that gets info from Bluetooth service
+    static Handler mhandler; // handler that gets info from Bluetooth service
 
     private static final UUID mdpUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     //private static final UUID mdpUUID = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb");
@@ -34,10 +35,15 @@ public class BluetoothConnectionService {
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
 
-    public BluetoothConnectionService(Context context){
+    public BluetoothConnectionService(Context context, Handler handler){
         mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mhandler = handler;
         start();
+    }
+
+    public boolean getConnection(){
+        return  mConnectedThread.mmSocket.isConnected();
     }
 
     //this thread runs while listening for incoming connections.
@@ -231,9 +237,7 @@ public class BluetoothConnectionService {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer,0,bytes);
                     Log.d(TAG,"InputStream: "+incomingMessage);
-
-                    //handler.obtainMessage(1,bytes,-1,buffer).sendToTarget();
-
+                    mhandler.obtainMessage(1,incomingMessage).sendToTarget();
 
                 } catch (IOException e) {
                     e.printStackTrace();

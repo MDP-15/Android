@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +44,11 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     public DeviceListAdapter mDeviceListAdapter;
     BluetoothDevice mBTDevice;
     BluetoothConnectionService mBluetoothConnection;
+    static Handler mHandler;
 
     Button btnONOFF;
     Button btnScan;
+    TextView tvStatus;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -52,8 +56,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_bluetooth,null);
-
-
+        tvStatus = (TextView)getActivity().findViewById(R.id.tbRobotStatus);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         btnONOFF = (Button)view.findViewById(R.id.btnONOFF);
@@ -64,6 +67,8 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                 enableDisableBT();
             }
         });
+
+
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
         lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,13 +90,24 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                     mBTDevices.get(position).createBond();
                     mBTDevice = mBTDevices.get(position);
 
-//            mDeviceUUIDs = mBTDevice.getUuids();
-//            for(int i = 0; i < mDeviceUUIDs.length; i++){
-//                System.out.println(mDeviceUUIDs[i].toString());
-//            }
+                    mHandler = new Handler() {
 
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            switch (msg.what) {
+                                case 1:
+                                    String message = msg.obj.toString();
+                                    tvStatus.setText(message);
+                                    break;
+                                case 2:
+                                    //Update Map
+                                    break;
+                            }
+                        }
+                    };
 
-                    mBluetoothConnection = new BluetoothConnectionService(getActivity());
+                    mBluetoothConnection = new BluetoothConnectionService(getActivity(),mHandler);
                     if(mBTDevices.get(position).getBondState() == BluetoothDevice.BOND_BONDING){
                         // tvStatus.setText("Pairing");
                         Log.d(TAG,"BroadcastReceiver4: Pairing");
@@ -229,6 +245,8 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         }
     };
 
+
+
     private void checkBTPermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
 
@@ -248,6 +266,9 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     }
 
     public void senddata(String msg){
-        mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+        if(mBluetoothConnection.getConnection()){
+            mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+        }
+
     }
 }
