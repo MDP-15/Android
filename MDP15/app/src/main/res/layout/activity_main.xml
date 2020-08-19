@@ -60,7 +60,9 @@
             android:layout_toRightOf="@id/btnSetEndPoint"
             android:background="@drawable/rounded_button"
             android:textColor="#FFFFFF"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:id="@+id/btnFastest"
+            android:onClick="FastestPath"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -127,12 +129,14 @@
                         android:text="Function 1"
                         android:layout_toRightOf="@id/btnSetEndPoint"
                         android:background="@drawable/rounded_button"
+                        android:onClick="sendfunction1"
                         android:textColor="#FFFFFF"
                         android:layout_margin="10dp"/>
                     <Button
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="Function 2"
+                        android:onClick="sendfunction2"
                         android:layout_toRightOf="@id/btnSetEndPoint"
                         android:background="@drawable/rounded_button"
                         android:textColor="#FFFFFF"

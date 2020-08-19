@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnLeft;
     ImageButton btnRight;
     TextView tvStatus;
+    SharedPreferences pref;
+    String function1,function2;
     private boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 btDialog.senddata("f");
             }
         });
+
+        pref = getSharedPreferences("MDP_FUNCTIONS",Context.MODE_PRIVATE);
 
         //Buttons
         btnUP = findViewById(R.id.btnUP);
@@ -93,17 +98,34 @@ public class MainActivity extends AppCompatActivity {
     }
     public void down(View v){
         if( connected){
-            btDialog.senddata("f");
+            btDialog.senddata("r");
         }
     }
     public void left(View v){
         if( connected){
-            btDialog.senddata("f");
+            btDialog.senddata("tl");
         }
     }
     public void right(View v){
         if( connected){
-            btDialog.senddata("f");
+            btDialog.senddata("tr");
+        }
+    }
+
+    public void sendfunction1(View view){
+        //Get stored value
+        function1 = pref.getString("Function1","f");
+        if( connected){
+            btDialog.senddata(function1);
+        }
+
+    }
+
+    public void sendfunction2(View view){
+        //Get stored value
+        function2 = pref.getString("Function2","r");
+        if( connected){
+            btDialog.senddata(function2);
         }
     }
 
@@ -125,4 +147,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void FastestPath(View view) {
+        if( connected){
+            btDialog.senddata("beginExplore");
+        }
+    }
 }
