@@ -7,6 +7,8 @@
     <color name="gridBorderColor">#122fa1</color>
     <color name="zoneColor">#5d0600</color>
     <color name="obstacleColor">#6095fe</color>
+
+    <color name="idleColor">#000000</color>
     <color name="movingColor">#4da643</color>
     <color name="turningColor">#6e6e6e</color>
 </resources>

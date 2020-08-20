@@ -19,7 +19,7 @@ public class MazeManager {
     public void reset() {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
-                setGrid(i, j, context.getString(R.string.maze_unexplored));
+                setGrid(j, i, context.getString(R.string.maze_unexplored));
             }
         }
     }
@@ -51,7 +51,7 @@ public class MazeManager {
     }
 
     public void setGrid(int x, int y, String label) {
-        RelativeLayout layout = (RelativeLayout) maze[x][y];
+        RelativeLayout layout = (RelativeLayout) maze[y][x];
         setGrid(layout, context, label);
     }
 

@@ -12,7 +12,7 @@
         android:layout_alignStart="@id/maze"
         android:layout_alignBottom="@id/maze"
         android:translationZ="2dp"
-        android:background="@android:color/background_dark"
+        android:background="@color/idleColor"
         app:srcCompat="@drawable/robot_right" />
 
     <TextView
@@ -32,8 +32,10 @@
         android:id="@+id/goal_zone"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_alignEnd="@id/maze"
-        android:layout_alignTop="@id/maze"
+        android:layout_alignStart="@id/maze"
+        android:layout_alignBottom="@id/maze"
+        android:layout_marginStart="300dp"
+        android:layout_marginBottom="425dp"
         android:background="@drawable/border_zone"
         android:text="@string/goal_zone_text"
         android:textSize="30sp"

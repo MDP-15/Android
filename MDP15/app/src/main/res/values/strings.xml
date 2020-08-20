@@ -11,4 +11,7 @@
     <string name="maze_empty">Empty</string>
     <string name="maze_unexplored">Unexplored</string>
     <string name="maze_waypoint">Waypoint</string>
+    <string name="robot_idle">Idle</string>
+    <string name="robot_moving">Moving</string>
+    <string name="robot_turning">Turning</string>
 </resources>
