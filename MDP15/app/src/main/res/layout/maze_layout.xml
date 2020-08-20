@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/robot"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignStart="@id/maze"
         android:layout_alignBottom="@id/maze"
         android:translationZ="2dp"
@@ -17,26 +17,26 @@
 
     <TextView
         android:id="@+id/start_zone"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignStart="@id/maze"
         android:layout_alignBottom="@id/maze"
         android:background="@drawable/border_zone"
         android:text="@string/start_zone_text"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:translationZ="1dp" />
 
     <TextView
         android:id="@+id/goal_zone"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignEnd="@id/maze"
         android:layout_alignTop="@id/maze"
         android:background="@drawable/border_zone"
         android:text="@string/goal_zone_text"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:translationZ="1dp" />
@@ -44,8 +44,8 @@
     <GridLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/maze"
-    android:layout_width="600dp"
-    android:layout_height="800dp"
+    android:layout_width="375dp"
+    android:layout_height="500dp"
     android:layout_centerHorizontal="true"
     android:columnCount="15"
     android:rowCount="20"
@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -67,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -79,8 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -91,8 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -103,8 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -115,8 +115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -127,8 +127,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -139,8 +139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -151,8 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -163,8 +163,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -175,8 +175,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -187,8 +187,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -199,8 +199,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -211,8 +211,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -223,8 +223,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -235,8 +235,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -247,8 +247,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -259,8 +259,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -271,8 +271,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -283,8 +283,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -295,8 +295,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -307,8 +307,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -319,8 +319,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -331,8 +331,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -343,8 +343,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -355,8 +355,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -367,8 +367,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -379,8 +379,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -391,8 +391,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -403,8 +403,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -415,8 +415,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -427,8 +427,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -439,8 +439,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -451,8 +451,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -463,8 +463,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -475,8 +475,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -487,8 +487,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -499,8 +499,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -511,8 +511,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -523,8 +523,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -535,8 +535,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -547,8 +547,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -559,8 +559,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -571,8 +571,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -583,8 +583,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -595,8 +595,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -607,8 +607,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -619,8 +619,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -631,8 +631,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -643,8 +643,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -655,8 +655,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -667,8 +667,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -679,8 +679,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -691,8 +691,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -703,8 +703,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -715,8 +715,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -727,8 +727,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -739,8 +739,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -751,8 +751,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -763,8 +763,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -775,8 +775,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -787,8 +787,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -799,8 +799,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -811,8 +811,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -823,8 +823,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -835,8 +835,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -847,8 +847,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -859,8 +859,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -871,8 +871,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -883,8 +883,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -895,8 +895,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -907,8 +907,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -919,8 +919,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -931,8 +931,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -943,8 +943,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -955,8 +955,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -967,8 +967,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -979,8 +979,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -991,8 +991,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1003,8 +1003,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1015,8 +1015,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1027,8 +1027,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_obstacle"
                 app:srcCompat="@drawable/go" />
         </RelativeLayout>
@@ -1039,8 +1039,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_obstacle"
                 app:srcCompat="@drawable/arrow_right" />
         </RelativeLayout>
@@ -1051,16 +1051,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_obstacle"
                 app:srcCompat="@android:color/transparent" />
             <TextView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:text="A"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -1071,8 +1071,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_obstacle"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1083,8 +1083,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1095,8 +1095,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1107,8 +1107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1119,8 +1119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1131,8 +1131,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1143,8 +1143,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1155,8 +1155,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1167,8 +1167,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1179,8 +1179,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1191,8 +1191,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1203,8 +1203,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1215,8 +1215,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1227,8 +1227,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1239,8 +1239,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1251,8 +1251,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1263,8 +1263,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1275,8 +1275,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_unknown"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1287,8 +1287,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border_unknown"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1299,8 +1299,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1311,8 +1311,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1323,8 +1323,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1335,8 +1335,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1347,8 +1347,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1359,8 +1359,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1371,8 +1371,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1383,8 +1383,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1395,8 +1395,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1407,8 +1407,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1419,8 +1419,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1431,8 +1431,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1443,8 +1443,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1455,8 +1455,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1467,8 +1467,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1479,8 +1479,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1491,8 +1491,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1503,8 +1503,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1515,8 +1515,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1527,8 +1527,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1539,8 +1539,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1551,8 +1551,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1563,8 +1563,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1575,8 +1575,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1587,8 +1587,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1599,8 +1599,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1611,8 +1611,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1623,8 +1623,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1635,8 +1635,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1647,8 +1647,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1659,8 +1659,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1671,8 +1671,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1683,8 +1683,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1695,8 +1695,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1707,8 +1707,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1719,8 +1719,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1731,8 +1731,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1743,8 +1743,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1755,8 +1755,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1767,8 +1767,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1779,8 +1779,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1791,8 +1791,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1803,8 +1803,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1815,8 +1815,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1827,8 +1827,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1839,8 +1839,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1851,8 +1851,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1863,8 +1863,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1875,8 +1875,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1887,8 +1887,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1899,8 +1899,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1911,8 +1911,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1923,8 +1923,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1935,8 +1935,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1947,8 +1947,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1959,8 +1959,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1971,8 +1971,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1983,8 +1983,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -1995,8 +1995,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2007,8 +2007,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2019,8 +2019,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2031,8 +2031,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2043,8 +2043,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2055,8 +2055,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2067,8 +2067,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2079,8 +2079,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2091,8 +2091,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2103,8 +2103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2115,8 +2115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2127,8 +2127,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@drawable/waypoint" />
         </RelativeLayout>
@@ -2139,8 +2139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2151,8 +2151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2163,8 +2163,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2175,8 +2175,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2187,8 +2187,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2199,8 +2199,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2211,8 +2211,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2223,8 +2223,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2235,8 +2235,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2247,8 +2247,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2259,8 +2259,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2271,8 +2271,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2283,8 +2283,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2295,8 +2295,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2307,8 +2307,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2319,8 +2319,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2331,8 +2331,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2343,8 +2343,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2355,8 +2355,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2367,8 +2367,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2379,8 +2379,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2391,8 +2391,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2403,8 +2403,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2415,8 +2415,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2427,8 +2427,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2439,8 +2439,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2451,8 +2451,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2463,8 +2463,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2475,8 +2475,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2487,8 +2487,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2499,8 +2499,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2511,8 +2511,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2523,8 +2523,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2535,8 +2535,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2547,8 +2547,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2559,8 +2559,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2571,8 +2571,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2583,8 +2583,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2595,8 +2595,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2607,8 +2607,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2619,8 +2619,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2631,8 +2631,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2643,8 +2643,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2655,8 +2655,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2667,8 +2667,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2679,8 +2679,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2691,8 +2691,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2703,8 +2703,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2715,8 +2715,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2727,8 +2727,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2739,8 +2739,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2751,8 +2751,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2763,8 +2763,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2775,8 +2775,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2787,8 +2787,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2799,8 +2799,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2811,8 +2811,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2823,8 +2823,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2835,8 +2835,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2847,8 +2847,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2859,8 +2859,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2871,8 +2871,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2883,8 +2883,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2895,8 +2895,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2907,8 +2907,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2919,8 +2919,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2931,8 +2931,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2943,8 +2943,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2955,8 +2955,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2967,8 +2967,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2979,8 +2979,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -2991,8 +2991,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3003,8 +3003,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3015,8 +3015,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3027,8 +3027,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3039,8 +3039,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3051,8 +3051,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3063,8 +3063,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3075,8 +3075,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3087,8 +3087,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3099,8 +3099,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3111,8 +3111,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3123,8 +3123,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3135,8 +3135,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3147,8 +3147,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3159,8 +3159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3171,8 +3171,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3183,8 +3183,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3195,8 +3195,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3207,8 +3207,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3219,8 +3219,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3231,8 +3231,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3243,8 +3243,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3255,8 +3255,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3267,8 +3267,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3279,8 +3279,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3291,8 +3291,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3303,8 +3303,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3315,8 +3315,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3327,8 +3327,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3339,8 +3339,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3351,8 +3351,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3363,8 +3363,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3375,8 +3375,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3387,8 +3387,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3399,8 +3399,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3411,8 +3411,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3423,8 +3423,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3435,8 +3435,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3447,8 +3447,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3459,8 +3459,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3471,8 +3471,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3483,8 +3483,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3495,8 +3495,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3507,8 +3507,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3519,8 +3519,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3531,8 +3531,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3543,8 +3543,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3555,8 +3555,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3567,8 +3567,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3579,8 +3579,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3591,8 +3591,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3603,8 +3603,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3615,8 +3615,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3627,8 +3627,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3639,8 +3639,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>
@@ -3651,8 +3651,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="@drawable/border"
                 app:srcCompat="@android:color/transparent" />
         </RelativeLayout>

@@ -104,11 +104,11 @@ public class MazeManager {
         grid.setBackground(context.getDrawable(R.drawable.border_obstacle));
         grid.setImageResource(android.R.color.transparent);
         TextView textView = new TextView(context);
-        textView.setWidth(40);
-        textView.setHeight(40);
+        textView.setWidth(25);
+        textView.setHeight(25);
         textView.setText(label);
         textView.setTextColor(context.getColor(android.R.color.white));
-        textView.setTextSize(30);
+        textView.setTextSize(18);
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         layout.addView(textView);
