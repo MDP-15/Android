@@ -7,6 +7,10 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     >
+
+    <include
+        layout="@layout/appbar">
+    </include>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,14 +20,14 @@
             android:id="@+id/tbRobotStatus"
             android:layout_centerHorizontal="true"
             android:text="Status: Nothing"
-            ></TextView>
+            />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:layout_width="400dp"
-            android:layout_height="600dp"
+            android:layout_width="350dp"
+            android:layout_height="500dp"
             android:text="Box"
             android:layout_centerHorizontal="true">
         </Button>
@@ -32,21 +36,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Set Start Point"
-            android:layout_toLeftOf="@id/btnSetEndPoint"></Button>
+            android:id="@+id/btnSetStartPoint"
+            android:layout_toLeftOf="@id/btnSetEndPoint"
+            android:background="@drawable/rounded_button"
+            android:textColor="#FFFFFF"
+            android:layout_margin="10dp"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Set Start Point"
+            android:text="Set End Point"
             android:layout_centerHorizontal="true"
-            android:id="@+id/btnSetEndPoint"></Button>
+            android:id="@+id/btnSetEndPoint"
+            android:background="@drawable/rounded_button"
+            android:textColor="#FFFFFF"
+            android:layout_margin="10dp"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Set Start Point"
-            android:layout_toRightOf="@id/btnSetEndPoint"></Button>
+            android:text="Fastest Path"
+            android:layout_toRightOf="@id/btnSetEndPoint"
+            android:background="@drawable/rounded_button"
+            android:textColor="#FFFFFF"
+            android:layout_margin="10dp"
+            android:id="@+id/btnFastest"
+            android:onClick="FastestPath"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -56,26 +72,136 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <RelativeLayout
+                android:paddingTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Map Settings Placeholder"
+                    android:textSize="18dp"
+                    android:id="@+id/mapsettingstitle"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mapsettingstitle"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/mapll">
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Manual"
+                        android:layout_toRightOf="@id/btnSetEndPoint"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="#FFFFFF"
+                        android:layout_margin="10dp"/>
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Auto"
+                        android:layout_toRightOf="@id/btnSetEndPoint"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="#FFFFFF"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Functions"
+                    android:textSize="18dp"
+                    android:id="@+id/functionstitle"
+                    android:layout_below="@id/mapll"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/functionstitle"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/functionsll"
+                    android:paddingBottom="10dp">
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Function 1"
+                        android:layout_toRightOf="@id/btnSetEndPoint"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="sendfunction1"
+                        android:textColor="#FFFFFF"
+                        android:layout_margin="10dp"/>
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Function 2"
+                        android:onClick="sendfunction2"
+                        android:layout_toRightOf="@id/btnSetEndPoint"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="#FFFFFF"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <TextView
+                android:layout_weight="3"
+                android:paddingTop="50dp"
+                android:paddingBottom="20dp">
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:onClick="up"
+                    android:id="@+id/btnUP"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Map Settings Placeholder"></TextView>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <TextView
+                    android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_forward"
+                    android:textColor="#FFFFFF"
+                    />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:onClick="down"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="BUTTONS Placeholder"></TextView>
+                    android:layout_toRightOf="@id/btnLeft"
+                    android:layout_marginTop="100dp"
+                    android:id="@+id/btnDown"
+                    android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_reverse"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#FFFFFF"
+                    />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="Left"
+                    android:layout_marginTop="50dp"
+                    android:onClick="left"
+                    android:layout_toLeftOf="@id/btnUP"
+                    android:id="@+id/btnLeft"
+                    android:background="@drawable/circle_button"
+                    android:elevation="3dp"
+                    android:src="@drawable/arrow_rl"
+                    android:textColor="#FFFFFF"/>
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="50dp"
+                    android:elevation="3dp"
+                    android:onClick="right"
+                    android:src="@drawable/arrow_rr"
+                    android:layout_toRightOf="@id/btnUP"
+                    android:id="@+id/btnRight"
+                    android:background="@drawable/circle_button"
+                    android:textColor="#FFFFFF"/>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
