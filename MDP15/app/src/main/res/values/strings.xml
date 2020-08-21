@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">MDP15</string>
+    <string name="start_zone_text">S</string>
+    <string name="goal_zone_text">G</string>
+    <string name="maze_go">Go</string>
+    <string name="maze_up">Up</string>
+    <string name="maze_down">Down</string>
+    <string name="maze_left">Left</string>
+    <string name="maze_right">Right</string>
+    <string name="maze_obstacle">Obstacle</string>
+    <string name="maze_empty">Empty</string>
+    <string name="maze_unexplored">Unexplored</string>
+    <string name="maze_waypoint">Waypoint</string>
+    <string name="robot_idle">Idle</string>
+    <string name="robot_moving">Moving</string>
+    <string name="robot_turning">Turning</string>
 </resources>
