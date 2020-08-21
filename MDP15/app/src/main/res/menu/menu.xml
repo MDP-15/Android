@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Bluetooth"
+        android:id="@+id/btnBluetooth"
+        app:showAsAction="never"
+        android:onClick="openBluetooth"
+        />
+    <item
+        android:title="Reconfigure Functions"
+        android:id="@+id/btnReconfigure"
+        app:showAsAction="never"
+        android:onClick="openReconfigure"
+        />
+
+</menu>
