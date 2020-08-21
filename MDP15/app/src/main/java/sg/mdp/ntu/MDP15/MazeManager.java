@@ -29,7 +29,7 @@ public class MazeManager {
             layout.removeViewAt(1);
         }
         if (label.length() == 1) {
-            setText(layout, context, label);
+            setText(layout, context, label);  // if it is a single character string, directly put it
         } else {
             if (label.equals(context.getString(R.string.maze_go))) {
                 setGo(layout, context);
@@ -51,7 +51,7 @@ public class MazeManager {
     }
 
     public void setGrid(int x, int y, String label) {
-        RelativeLayout layout = (RelativeLayout) maze[y][x];
+        RelativeLayout layout = maze[y][x];
         setGrid(layout, context, label);
     }
 

@@ -11,4 +11,6 @@
     <color name="idleColor">#000000</color>
     <color name="movingColor">#4da643</color>
     <color name="turningColor">#6e6e6e</color>
+
+    <color name="popupWindowColor">#84a7fe</color>
 </resources>
