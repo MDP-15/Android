@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView robot;
     TextView startZone;
     TextView goalZone;
+    static MazeManager mazeManager;
     
     BluetoothDialog btDialog;
     private Toolbar toolbar;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvStatus;
     SharedPreferences pref;
     String function1,function2;
+    static RobotManager robotManager;
     private boolean connected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         // robot
         robot = findViewById(R.id.robot);
-        final RobotManager robotManager = new RobotManager(robot, getApplicationContext());
+        robotManager = new RobotManager(robot, getApplicationContext());
         robot.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {}
@@ -92,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
             layout.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
+                    Log.d("MainMaze","X = "+motionEvent.getRawX()+ "Y = " + motionEvent.getRawY());
+
+
                     final PopupWindow popupWindow = new PopupWindow(getApplicationContext());
                     ArrayList<String> sortList = new ArrayList<String>();
                     sortList.add("Move robot here");
@@ -126,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         // initialize maze manager
-        MazeManager mazeManager = new MazeManager(maze, getApplicationContext());
+        mazeManager = new MazeManager(maze, getApplicationContext());
         mazeManager.reset();
 
         //Toolbar

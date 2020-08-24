@@ -1,6 +1,7 @@
 package sg.mdp.ntu.MDP15;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,8 +21,8 @@ public class RobotManager {
     public RobotManager (ImageView robot, Context context) {
         this.robot = robot;
         this.context = context;
-        this.curX = 0;
-        this.curY = 0;
+        this.curX = 1;
+        this.curY = 1;
         this.orientation = Orientation.RIGHT;
     }
 
@@ -43,8 +44,8 @@ public class RobotManager {
         curY = y;
 
         RelativeLayout.MarginLayoutParams params = (RelativeLayout.MarginLayoutParams) robot.getLayoutParams();
-        params.leftMargin = (x - 1) * 25;
-        params.bottomMargin = (y - 1) * 25;
+        params.leftMargin = (x - 1) * 33;
+        params.bottomMargin = (y - 1) * 33;
         robot.setLayoutParams(params);
     }
 
@@ -62,13 +63,18 @@ public class RobotManager {
     }
 
     public void moveForward() {
+        Log.d("RobotManager","Move forward called");
         if (orientation == Orientation.RIGHT) {
             setRobotCoordinates(curX + 1, curY);
+            Log.d("RobotManager","X = "+curX+" Y = "+curY);
         } else if (orientation == Orientation.LEFT) {
+            Log.d("RobotManager","X = "+curX+" Y = "+curY);
             setRobotCoordinates(curX - 1, curY);
         } else if (orientation == Orientation.UP) {
+            Log.d("RobotManager","X = "+curX+" Y = "+curY);
             setRobotCoordinates(curX , curY + 1);
         } else if (orientation == Orientation.DOWN) {
+            Log.d("RobotManager","X = "+curX+" Y = "+curY);
             setRobotCoordinates(curX , curY - 1);
         }
     }

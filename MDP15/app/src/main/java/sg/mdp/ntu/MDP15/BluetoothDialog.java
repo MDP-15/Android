@@ -99,9 +99,11 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                 case 1:
                                     String message = msg.obj.toString();
                                     tvStatus.setText(message);
+                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
                                     break;
                                 case 2:
                                     //Update Map
+
                                     break;
                             }
                         }
