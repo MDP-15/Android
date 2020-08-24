@@ -46,6 +46,8 @@ public class MazeManager {
                 setEmpty(layout, context);
             } else if (label.equals(context.getString(R.string.maze_unexplored))) {
                 setUnexplored(layout, context);
+            } else if (label.equals(context.getString(R.string.maze_stop))) {
+                setStop(layout, context);
             }
         }
     }
@@ -112,5 +114,11 @@ public class MazeManager {
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         layout.addView(textView);
+    }
+
+    private static void setStop(RelativeLayout layout, Context context) {
+        ImageView grid = (ImageView) layout.getChildAt(0);
+        grid.setBackground(context.getDrawable(R.drawable.border_obstacle));
+        grid.setImageResource(R.drawable.stop);
     }
 }
