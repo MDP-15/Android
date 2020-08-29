@@ -2,14 +2,19 @@ package sg.mdp.ntu.MDP15;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MazeManager {
-    private RelativeLayout[][] maze;
+    private static RelativeLayout[][] maze;
     private Context context;
+    static int curx;
+    static int cury;
+
 
     public MazeManager(RelativeLayout[][] maze, Context context) {
         this.maze = maze;
@@ -20,6 +25,35 @@ public class MazeManager {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
                 setGrid(j, i, context.getString(R.string.maze_unexplored));
+            }
+        }
+    }
+
+    public static void setGrid(RelativeLayout layout, Context context, String label, int finalK, int finalJ) {
+        if (layout.getChildCount() > 1) {  // remove text views if exist
+            layout.removeViewAt(1);
+        }
+        if (label.length() == 1) {
+            setText(layout, context, label);  // if it is a single character string, directly put it
+        } else {
+            if (label.equals(context.getString(R.string.maze_go))) {
+                setGo(layout, context);
+            } else if (label.equals(context.getString(R.string.maze_up))
+                    || label.equals(context.getString(R.string.maze_down))
+                    || label.equals(context.getString(R.string.maze_left))
+                    || label.equals(context.getString(R.string.maze_right))) {
+                setArrow(layout, context, label);
+            } else if (label.equals(context.getString(R.string.maze_waypoint))) {
+                setWaypoint(layout, context);
+                MainActivity.btDialog.senddata("{\"Waypoint\":\"X:"+finalK+"\""+"\"Y:"+finalJ+"\"}");
+            } else if (label.equals(context.getString(R.string.maze_obstacle))) {
+                setObstacle(layout, context);
+            } else if (label.equals(context.getString(R.string.maze_empty))) {
+                setEmpty(layout, context);
+            } else if (label.equals(context.getString(R.string.maze_unexplored))) {
+                setUnexplored(layout, context);
+            } else if (label.equals(context.getString(R.string.maze_stop))) {
+                setStop(layout, context);
             }
         }
     }
@@ -99,7 +133,9 @@ public class MazeManager {
         ImageView grid = (ImageView) layout.getChildAt(0);
         grid.setBackground(context.getDrawable(R.drawable.border));
         grid.setImageResource(R.drawable.waypoint);
+
     }
+
 
     private static void setText(RelativeLayout layout, Context context, String label) {
         ImageView grid = (ImageView) layout.getChildAt(0);
@@ -121,4 +157,5 @@ public class MazeManager {
         grid.setBackground(context.getDrawable(R.drawable.border_obstacle));
         grid.setImageResource(R.drawable.stop);
     }
+
 }

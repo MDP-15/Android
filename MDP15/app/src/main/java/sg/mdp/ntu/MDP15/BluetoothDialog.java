@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -97,13 +102,23 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                             super.handleMessage(msg);
                             switch (msg.what) {
                                 case 1:
-                                    String message = msg.obj.toString();
-                                    tvStatus.setText(message);
-                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
+                                    try {
+                                        String str = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(str);
+                                        str = jobj.getString("status");
+                                        tvStatus.setText("Status: "+str);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     break;
                                 case 2:
-                                    //Update Map
-
+                                    //Update Map waypoint
+                                    //Get map coordinates
+                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
+                                    break;
+                                case 3:
+                                    //Update Robot forward
+                                    MainActivity.robotManager.moveForward();
                                     break;
                             }
                         }
@@ -268,7 +283,9 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     }
 
     public void senddata(String msg){
+        Log.d("BTDIALOG","trying to send data");
         if(mBluetoothConnection.getConnection()){
+            Log.d("BTDIALOG","trying to sending data");
             mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
         }
 

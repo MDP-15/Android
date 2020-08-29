@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     TextView goalZone;
     static MazeManager mazeManager;
     
-    BluetoothDialog btDialog;
+    static BluetoothDialog btDialog;
     private Toolbar toolbar;
     Button btnSetStartPoint;
     ImageButton btnUP;
@@ -62,13 +62,25 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     String function1,function2;
     static RobotManager robotManager;
-    private boolean connected;
+    //private boolean connected;
+
+
+
+    //Waypoint stuff
+    int curx;
+    int cury;
+    String oldBg;
+    String oldRes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        connected = false;
+        //connected = false;
         btDialog = new BluetoothDialog();
         setContentView(R.layout.activity_main);
+        curx = 0;
+        cury = 0;
+        oldBg = "";
+        oldRes = "";
 
         // robot
         robot = findViewById(R.id.robot);
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         // prepare maze grids
         gridLayout = findViewById(R.id.maze);
-        RelativeLayout[][] maze = new RelativeLayout[20][15];
+        final RelativeLayout[][] maze = new RelativeLayout[20][15];
         int j = 19;
         int k = 0;
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
@@ -110,8 +122,15 @@ public class MainActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView parent, View view, int position, long id) {
                             if (position == 0) {
                                 robotManager.setRobotCoordinates(finalK, finalJ);
+                                btDialog.senddata("{\"RobotPos\":\"X:"+finalK+"\""+"\"Y:"+finalJ+"\"}");
                             } else {
-                                MazeManager.setGrid((RelativeLayout) layout, getApplicationContext(), getString(R.string.maze_waypoint));
+                                mazeManager.setGrid(cury,curx,getString(R.string.maze_empty));
+                                Log.d("MAINMAZE",oldRes);
+                                Log.d("MAINMAZE",oldBg);
+                                mazeManager.setGrid(finalK,finalJ,getString(R.string.maze_waypoint));
+                                curx = finalJ;
+                                cury = finalK;
+
                             }
                             popupWindow.dismiss();
                         }
@@ -131,9 +150,11 @@ public class MainActivity extends AppCompatActivity {
                 j--;
             }
         }
+
         // initialize maze manager
         mazeManager = new MazeManager(maze, getApplicationContext());
         mazeManager.reset();
+
 
         //Toolbar
         toolbar = (Toolbar)findViewById(R.id.myToolbar);
@@ -156,11 +177,11 @@ public class MainActivity extends AppCompatActivity {
 
         tvStatus = findViewById(R.id.tbRobotStatus);
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
-        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
-        this.registerReceiver(broadcastReceiver, filter);
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+//        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
+//        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+//        this.registerReceiver(broadcastReceiver, filter);
 
 
 
@@ -184,65 +205,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void up(View v){
-        if( connected){
+
             btDialog.senddata("f");
-        }
+
     }
     public void down(View v){
-        if( connected){
+
             btDialog.senddata("r");
-        }
+
     }
     public void left(View v){
-        if( connected){
+
             btDialog.senddata("tl");
-        }
+
     }
     public void right(View v){
-        if( connected){
+
             btDialog.senddata("tr");
-        }
+
     }
 
     public void sendfunction1(View view){
         //Get stored value
         function1 = pref.getString("Function1","f");
-        if( connected){
+
             btDialog.senddata(function1);
-        }
+
 
     }
 
     public void sendfunction2(View view){
         //Get stored value
         function2 = pref.getString("Function2","r");
-        if( connected){
+
             btDialog.senddata(function2);
-        }
+
     }
 
-    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        BluetoothDevice device;
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
-                Toast.makeText(getApplicationContext(), "Device is now Connected",    Toast.LENGTH_SHORT).show();
-                connected = true;
-                tvStatus.setText("Bluetooth is connected");
-            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-                Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
-                connected = false;
-                tvStatus.setText("Bluetooth died");
-            }
-        }
-    };
+//    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+//        BluetoothDevice device;
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            Log.d("MAIN","IN BR");
+//            String action = intent.getAction();
+//            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+//                Toast.makeText(getApplicationContext(), "Device is now Connected",    Toast.LENGTH_SHORT).show();
+//                connected = true;
+//                tvStatus.setText("Bluetooth is connected");
+//            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+//                Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
+//                connected = false;
+//                tvStatus.setText("Bluetooth died");
+//            }
+//        }
+//    };
 
     public void FastestPath(View view) {
-        if( connected){
             btDialog.senddata("beginExplore");
-        }
     }
 
 }

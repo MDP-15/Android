@@ -237,7 +237,22 @@ public class BluetoothConnectionService {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer,0,bytes);
                     Log.d(TAG,"InputStream: "+incomingMessage);
-                    mhandler.obtainMessage(1,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("status"))
+                        mhandler.obtainMessage(1,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("MAP_WAYPOINT")))
+                        mhandler.obtainMessage(2,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("ROBOT_FORWARD")))
+                        mhandler.obtainMessage(3,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("ROBOT_RR")))
+                        mhandler.obtainMessage(4,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("ROBOT_RL")))
+                        mhandler.obtainMessage(5,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("ROBOT_BACK")))
+                        mhandler.obtainMessage(6,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("ROBOT_START")))
+                        mhandler.obtainMessage(7,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("MAP_OBSTACLE")))
+                        mhandler.obtainMessage(8,incomingMessage).sendToTarget();
 
                 } catch (IOException e) {
                     e.printStackTrace();
