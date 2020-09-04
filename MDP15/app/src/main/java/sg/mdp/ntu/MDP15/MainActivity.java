@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     boolean motionONOFF = false;
     SensorManager sensorManager;
     Sensor sensor;
+    boolean sending = false;
 
 
     //Waypoint stuff
@@ -357,16 +358,56 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         //i did all the testing already
         if(x > 4){
-            Log.d("Accel","Left");
+            if(!sending){
+                sending = true;
+                Log.d("Accel","Left");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sending = false;
+                    }
+                },1000);
+           }
+
         }
         if(x < -4){
-            Log.d("Accel","Right");
+            if(!sending){
+                sending = true;
+                Log.d("Accel","Right");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sending = false;
+                    }
+                },1000);
+            }
+
         }
         if(y > 4){
-            Log.d("Accel","Backward");
+            if(!sending){
+                sending = true;
+                Log.d("Accel","Backward");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sending = false;
+                    }
+                },1000);
+            }
+
         }
         if(y < -4){
-            Log.d("Accel","Forward");
+            if(!sending){
+                sending = true;
+                Log.d("Accel","Front");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sending = false;
+                    }
+                },1000);
+            }
+
         }
 
     }
