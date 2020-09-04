@@ -34,16 +34,18 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Set Start Point"
+            android:text="Start Explore"
             android:id="@+id/btnSetStartPoint"
             android:layout_toLeftOf="@id/btnSetEndPoint"
             android:background="@drawable/rounded_button"
             android:textColor="#FFFFFF"
+            android:onClick="startExplore"
             android:layout_margin="10dp"/>
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Set End Point"
+            android:text="Set Waypoint"
+            android:onClick="setWaypoint"
             android:layout_centerHorizontal="true"
             android:id="@+id/btnSetEndPoint"
             android:background="@drawable/rounded_button"

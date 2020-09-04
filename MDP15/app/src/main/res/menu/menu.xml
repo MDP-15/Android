@@ -14,5 +14,10 @@
         app:showAsAction="never"
         android:onClick="openReconfigure"
         />
+    <item
+        android:title="Motion Sensor"
+        android:id="@+id/btnMotion"
+        app:showAsAction="never"
+        android:onClick="motionONOFF"/>
 
 </menu>

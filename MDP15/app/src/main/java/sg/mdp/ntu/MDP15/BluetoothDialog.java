@@ -120,6 +120,21 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                     //Update Robot forward
                                     MainActivity.robotManager.moveForward();
                                     break;
+                                case 9:
+                                    String str = "";
+                                    try {
+                                        str = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(str);
+                                        str = jobj.getString("grid");
+                                        //maptest(str);
+                                        Log.d("BTMAZE",str);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                default:
+                                    break;
+
                             }
                         }
                     };
@@ -172,6 +187,58 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
+
+    private void maptest(String str) {
+        String mapdescriptor = str;
+        int currgrid = 0;
+        int currow = 19;
+        int digit = 0;
+        int x = 0, y= 0;
+        String curr;
+        for(int j = 0 ; j < 75; j++){
+            curr = String.valueOf(mapdescriptor.charAt(j));
+            digit = Integer.parseInt(curr,16);
+            if(digit != 0){
+                if(digit >= 8){
+                    //1st block is an obstacle
+                    x = currow; //first row is 19
+                    y = currgrid; //first column is 0
+                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
+                    Log.d("Maze","x = "+x+" y = "+y);
+                    digit -= 8;
+                }
+                if(digit >= 4){
+                    //2nd block is an obstacle
+                    x = currow;
+                    y = currgrid+1;
+                    Log.d("Maze","x = "+currow+" y = "+y); //why is it giving me 01 and not 1
+                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
+                    digit -= 4;
+                }
+                if(digit >= 2){
+                    //3rd block is an obstacle
+                    x = currow;
+                    y = currgrid+2;
+                    Log.d("Maze","x = "+x+" y = "+y);
+                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
+                    digit -= 2;
+                }
+                if(digit == 1){
+                    x = currow;
+                    y = currgrid+3;
+                    if(y == 14){
+                        currgrid = -4;
+                        Log.d("Maze",currgrid+"");
+                    }
+                    //4th block is an obstacle
+                    Log.d("Maze","x = "+x+" y = "+y);
+                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
+                }
+            }
+            currgrid = currgrid + 4;
+            currow--;
+        }
     }
 
 
@@ -284,10 +351,13 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
     public void senddata(String msg){
         Log.d("BTDIALOG","trying to send data");
-        if(mBluetoothConnection.getConnection()){
-            Log.d("BTDIALOG","trying to sending data");
-            mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+        if(mBluetoothConnection != null){
+            if(mBluetoothConnection.getConnection()){
+                Log.d("BTDIALOG","trying to sending data");
+                mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+            }
         }
+
 
     }
 }

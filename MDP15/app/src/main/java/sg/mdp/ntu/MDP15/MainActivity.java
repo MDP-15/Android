@@ -1,5 +1,6 @@
 package sg.mdp.ntu.MDP15;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,6 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -45,12 +47,15 @@ import android.widget.Toast;
 import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity {
+    //Maze stuff
     GridLayout gridLayout;
     ImageView robot;
     TextView startZone;
     TextView goalZone;
     static MazeManager mazeManager;
-    
+    RelativeLayout[][] maze;
+
+    //Bluetooth stuff
     static BluetoothDialog btDialog;
     private Toolbar toolbar;
     Button btnSetStartPoint;
@@ -62,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     String function1,function2;
     static RobotManager robotManager;
-    //private boolean connected;
-
 
 
     //Waypoint stuff
@@ -71,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     int cury;
     String oldBg;
     String oldRes;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,60 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
         // prepare maze grids
         gridLayout = findViewById(R.id.maze);
-        final RelativeLayout[][] maze = new RelativeLayout[20][15];
-        int j = 19;
-        int k = 0;
-        for (int i = 0; i < gridLayout.getChildCount(); i++) {
-            final View layout = gridLayout.getChildAt(i);
-            maze[j][k] = (RelativeLayout) layout;
-            final int finalJ = j;
-            final int finalK = k;
-            layout.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    Log.d("MainMaze","X = "+motionEvent.getRawX()+ "Y = " + motionEvent.getRawY());
-
-
-                    final PopupWindow popupWindow = new PopupWindow(getApplicationContext());
-                    ArrayList<String> sortList = new ArrayList<String>();
-                    sortList.add("Move robot here");
-                    sortList.add("Place waypoint here");
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, sortList);
-                    ListView options = new ListView(getApplicationContext());
-                    options.setAdapter(adapter);
-                    options.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView parent, View view, int position, long id) {
-                            if (position == 0) {
-                                robotManager.setRobotCoordinates(finalK, finalJ);
-                                btDialog.senddata("{\"RobotPos\":\"X:"+finalK+"\""+"\"Y:"+finalJ+"\"}");
-                            } else {
-                                mazeManager.setGrid(cury,curx,getString(R.string.maze_empty));
-                                Log.d("MAINMAZE",oldRes);
-                                Log.d("MAINMAZE",oldBg);
-                                mazeManager.setGrid(finalK,finalJ,getString(R.string.maze_waypoint));
-                                curx = finalJ;
-                                cury = finalK;
-
-                            }
-                            popupWindow.dismiss();
-                        }
-                    });
-                    popupWindow.setFocusable(true);
-                    popupWindow.setWidth(175);
-                    popupWindow.setBackgroundDrawable(getDrawable(R.color.popupWindowColor));
-                    popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-                    popupWindow.setContentView(options);
-                    popupWindow.showAsDropDown(findViewById(R.id.screen), (int) motionEvent.getRawX(), (int) (motionEvent.getRawY() - 95));
-                    return false;
-                }
-            });
-            k++;
-            if (k >= 15) {
-                k = 0;
-                j--;
-            }
-        }
+        maze = new RelativeLayout[20][15];
+        createMap();
 
         // initialize maze manager
         mazeManager = new MazeManager(maze, getApplicationContext());
@@ -167,25 +120,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Get saved stuff
         pref = getSharedPreferences("MDP_FUNCTIONS",Context.MODE_PRIVATE);
 
-        //Buttons
+        //Buttons and textviews
         btnUP = findViewById(R.id.btnUP);
         btnDown = findViewById(R.id.btnDown);
         btnLeft = findViewById(R.id.btnLeft);
         btnRight = findViewById(R.id.btnRight);
-
         tvStatus = findViewById(R.id.tbRobotStatus);
-
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-//        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
-//        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
-//        this.registerReceiver(broadcastReceiver, filter);
-
-
-
     }
+
+
 
 
     @Override
@@ -195,6 +141,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void openWaypoint(final int finalK, final int finalJ){
+        new AlertDialog.Builder(this)
+                .setTitle("Waypoint")
+                .setMessage("Set waypoint at X="+finalK+", Y= "+finalJ+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mazeManager.setGrid(cury,curx,getString(R.string.maze_empty));
+                        Log.d("MAINMAZE",oldRes);
+                        Log.d("MAINMAZE",oldBg);
+                        mazeManager.setGrid(finalK,finalJ,getString(R.string.maze_waypoint));
+                        curx = finalJ;
+                        cury = finalK;
+                    }
+                })
+                .setNegativeButton("No",null).show();
+    }
+
     public void openBluetooth(MenuItem item){
         btDialog.show(getSupportFragmentManager(),"Bluetooth");
     }
@@ -202,6 +166,19 @@ public class MainActivity extends AppCompatActivity {
     public void openReconfigure(MenuItem item){
         ReconfigureDialog rfDialog = new ReconfigureDialog();
         rfDialog.show(getSupportFragmentManager(),"Reconfigure");
+    }
+
+    public void motionONOFF(MenuItem item){
+
+    }
+
+    public void setWaypoint(View view){
+        WaypointDialog wpDialog = new WaypointDialog();
+        wpDialog.show(getSupportFragmentManager(),"Waypoint");
+    }
+
+    public void startExplore(View view0){
+
     }
 
     public void up(View v){
@@ -263,6 +240,56 @@ public class MainActivity extends AppCompatActivity {
 
     public void FastestPath(View view) {
             btDialog.senddata("beginExplore");
+    }
+
+    private void createMap() {
+        int j = 19;
+        int k = 0;
+        for (int i = 0; i < gridLayout.getChildCount(); i++) {
+            final View layout = gridLayout.getChildAt(i);
+            maze[j][k] = (RelativeLayout) layout;
+            final int finalJ = j;
+            final int finalK = k;
+            layout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    Log.d("MainMaze","X = "+motionEvent.getRawX()+ "Y = " + motionEvent.getRawY());
+
+
+                    final PopupWindow popupWindow = new PopupWindow(getApplicationContext());
+                    ArrayList<String> sortList = new ArrayList<String>();
+                    sortList.add("Move robot here");
+                    sortList.add("Place waypoint here");
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, sortList);
+                    ListView options = new ListView(getApplicationContext());
+                    options.setAdapter(adapter);
+                    options.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView parent, View view, int position, long id) {
+                            if (position == 0) {
+                                robotManager.setRobotCoordinates(finalK, finalJ);
+                                btDialog.senddata("{\"RobotPos\":\"X:"+finalK+"\""+"\"Y:"+finalJ+"\"}");
+                            } else {
+                                openWaypoint(finalK,finalJ);
+                            }
+                            popupWindow.dismiss();
+                        }
+                    });
+                    popupWindow.setFocusable(true);
+                    popupWindow.setWidth(175);
+                    popupWindow.setBackgroundDrawable(getDrawable(R.color.popupWindowColor));
+                    popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+                    popupWindow.setContentView(options);
+                    popupWindow.showAsDropDown(findViewById(R.id.screen), (int) motionEvent.getRawX(), (int) (motionEvent.getRawY() - 95));
+                    return false;
+                }
+            });
+            k++;
+            if (k >= 15) {
+                k = 0;
+                j--;
+            }
+        }
     }
 
 }

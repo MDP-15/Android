@@ -22,7 +22,6 @@ public class BluetoothConnectionService {
     static Handler mhandler; // handler that gets info from Bluetooth service
 
     private static final UUID mdpUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //private static final UUID mdpUUID = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb");
 
     private AcceptThread mInsecureAcceptThread;
     private ConnectThread mConnectThread;
@@ -253,6 +252,8 @@ public class BluetoothConnectionService {
                         mhandler.obtainMessage(7,incomingMessage).sendToTarget();
                     if(incomingMessage.contains(("MAP_OBSTACLE")))
                         mhandler.obtainMessage(8,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("grid")))
+                        mhandler.obtainMessage(9,incomingMessage).sendToTarget();
 
                 } catch (IOException e) {
                     e.printStackTrace();
