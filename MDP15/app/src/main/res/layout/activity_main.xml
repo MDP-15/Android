@@ -14,13 +14,33 @@
     </include>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:id="@+id/tbRobotStatus"
             android:layout_centerHorizontal="true"
             android:text="Status: Nothing"
+            />
+        <TextView
+            android:layout_width="200dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tbRobotStatus"
+            android:id="@+id/tbBT"
+            android:layout_centerHorizontal="true"
+            android:text="Bluetooth: ON"
+            />
+        <TextView
+            android:layout_width="200dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/tbMotion"
+            android:layout_toRightOf="@id/tbRobotStatus"
+            android:layout_centerHorizontal="true"
+            android:text="Motion Sensor: OFF"
             />
     </RelativeLayout>
     <RelativeLayout

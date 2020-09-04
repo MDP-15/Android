@@ -13,6 +13,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -46,7 +50,7 @@ import android.widget.Toast;
 
 import java.nio.charset.Charset;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
     //Maze stuff
     GridLayout gridLayout;
     ImageView robot;
@@ -64,9 +68,15 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnLeft;
     ImageButton btnRight;
     TextView tvStatus;
+    TextView tvmotion;
     SharedPreferences pref;
     String function1,function2;
     static RobotManager robotManager;
+
+    //Accelerometer stuff
+    boolean motionONOFF = false;
+    SensorManager sensorManager;
+    Sensor sensor;
 
 
     //Waypoint stuff
@@ -86,15 +96,25 @@ public class MainActivity extends AppCompatActivity {
         cury = 0;
         oldBg = "";
         oldRes = "";
+        
+        //Accelerometer
+        //initialize sensor manager
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        
+        
 
         // robot
         robot = findViewById(R.id.robot);
         robotManager = new RobotManager(robot, getApplicationContext());
         robot.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
-            public void onSingleClick(View view) {}
+            public void onSingleClick(View view) {
+                btDialog.senddata("tr");
+                robotManager.rotateRight();
+            }
             @Override
             public void onDoubleClick(View view) {
+                btDialog.senddata("tl");
                 robotManager.rotateLeft();
             }
         }));
@@ -129,9 +149,35 @@ public class MainActivity extends AppCompatActivity {
         btnLeft = findViewById(R.id.btnLeft);
         btnRight = findViewById(R.id.btnRight);
         tvStatus = findViewById(R.id.tbRobotStatus);
+        tvmotion = findViewById(R.id.tbMotion);
     }
 
+    private void start() {
+        sensorManager.registerListener(this,sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_FASTEST);
+    }
 
+    //when app minimize, turn off sensor
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+        tvmotion.setText("Motion Sensor: OFF");
+    }
+
+    //when app reopen, turn back on sensor
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    //when app close, turn off sensor
+    //Might not need this?
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sensorManager.unregisterListener(this);
+        tvmotion.setText("Motion Sensor: OFF");
+    }
 
 
     @Override
@@ -169,7 +215,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void motionONOFF(MenuItem item){
-
+        if(!motionONOFF){
+            start();
+            motionONOFF = true;
+            tvmotion.setText("Motion Sensor: ON");
+        }
+        else{
+            sensorManager.unregisterListener(this);
+            motionONOFF = false;
+            tvmotion.setText("Motion Sensor: OFF");
+        }
     }
 
     public void setWaypoint(View view){
@@ -292,4 +347,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float x=0 ,y=0 ,z = 0;
+        //get the values from the sensor
+        if(event.sensor.getType() == 1){
+            x = event.values[0];
+            y = event.values[1];
+        }
+        //i did all the testing already
+        if(x > 4){
+            Log.d("Accel","Left");
+        }
+        if(x < -4){
+            Log.d("Accel","Right");
+        }
+        if(y > 4){
+            Log.d("Accel","Backward");
+        }
+        if(y < -4){
+            Log.d("Accel","Forward");
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
