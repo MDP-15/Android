@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class BluetoothConnectionService {
     private static final String TAG = "BluetoothConnectionService";
-    private static final String appName = "MYAPP";
+    private static final String appName = "MDP 15 Tablet";
     static Handler mhandler; // handler that gets info from Bluetooth service
 
     private static final UUID mdpUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -254,11 +254,15 @@ public class BluetoothConnectionService {
                         mhandler.obtainMessage(8,incomingMessage).sendToTarget();
                     if(incomingMessage.contains(("grid")))
                         mhandler.obtainMessage(9,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("ID"))
+                        mhandler.obtainMessage(10,incomingMessage).sendToTarget();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG,"write: Error reading to inputstream "+e.getMessage());
                     break;
+                    //Bluetooth connection died.
+
                 }
             }
         }

@@ -5,7 +5,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Waypoint"
+        android:text="Enter Robot Coordinates"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:textSize="26dp"
@@ -32,11 +32,11 @@
         android:textSize="20dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tvX"
-        android:maxLength="1"
         android:layout_below="@id/wayTitle"
+        android:maxLength="1"
         android:inputType="number"
-        android:hint="0"
-        android:id="@+id/etX"/>
+        android:text="0"
+        android:id="@+id/etrX"/>
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -53,23 +53,23 @@
         android:layout_width="match_parent"
         android:padding="5dp"
         android:textSize="20dp"
-        android:hint="0"
-        android:maxLength="1"
+        android:text="0"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/tvX"
-        android:layout_below="@id/etX"
-        android:id="@+id/etY"
+        android:layout_below="@id/etrX"
+        android:maxLength="1"
+        android:id="@+id/etrY"
         android:inputType="number"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Waypoint"
-        android:id="@+id/btnSetWay"
+        android:text="Set Robot Coordinates"
+        android:id="@+id/btnSetRobotCoor"
         android:textSize="20dp"
         android:layout_marginTop="100dp"
         android:padding="5dp"
-        android:layout_below="@id/etY"
+        android:layout_below="@id/etrY"
         android:textColor="#FFFFFF"
         android:background="#6095FE"/>
 

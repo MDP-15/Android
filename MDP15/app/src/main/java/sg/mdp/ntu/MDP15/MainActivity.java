@@ -3,6 +3,8 @@ package sg.mdp.ntu.MDP15;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -63,12 +65,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     static BluetoothDialog btDialog;
     private Toolbar toolbar;
     Button btnSetStartPoint;
+    Button autoManual;
+    Button refresh;
     ImageButton btnUP;
     ImageButton btnDown;
     ImageButton btnLeft;
     ImageButton btnRight;
     TextView tvStatus;
     TextView tvmotion;
+    TextView bluetoothStatus;
     SharedPreferences pref;
     String function1,function2;
     static RobotManager robotManager;
@@ -86,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     String oldBg;
     String oldRes;
 
+    boolean maprefresh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         cury = 0;
         oldBg = "";
         oldRes = "";
-        
+        maprefresh = true;
         //Accelerometer
         //initialize sensor manager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -151,6 +158,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         btnRight = findViewById(R.id.btnRight);
         tvStatus = findViewById(R.id.tbRobotStatus);
         tvmotion = findViewById(R.id.tbMotion);
+        bluetoothStatus = findViewById(R.id.tbBT);
+        autoManual = findViewById(R.id.autoManaualbtn);
+        refresh = findViewById(R.id.refreshbtn);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        this.registerReceiver(broadcastReceiver, filter);
     }
 
     private void start() {
@@ -275,24 +291,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-//    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-//        BluetoothDevice device;
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            Log.d("MAIN","IN BR");
-//            String action = intent.getAction();
-//            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
-//                Toast.makeText(getApplicationContext(), "Device is now Connected",    Toast.LENGTH_SHORT).show();
-//                connected = true;
-//                tvStatus.setText("Bluetooth is connected");
-//            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-//                Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
-//                connected = false;
-//                tvStatus.setText("Bluetooth died");
-//            }
-//        }
-//    };
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        BluetoothDevice device;
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("MAIN","IN BR");
+            String action = intent.getAction();
+            device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                Toast.makeText(getApplicationContext(), "Device is now Connected", Toast.LENGTH_SHORT).show();
+                bluetoothStatus.setText("Bluetooth: Connected");
+            }
+            if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
+                bluetoothStatus.setText("Bluetooth: Disconnected");
+               // btDialog.reconnectBT();
+            }
+        }
+    };
 
     public void FastestPath(View view) {
             btDialog.senddata("beginExplore");
@@ -361,6 +377,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(!sending){
                 sending = true;
                 Log.d("Accel","Left");
+                //send data
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -373,6 +390,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(x < -4){
             if(!sending){
                 sending = true;
+                //send data
                 Log.d("Accel","Right");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -386,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(y > 4){
             if(!sending){
                 sending = true;
+                //send data
                 Log.d("Accel","Backward");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -399,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(y < -4){
             if(!sending){
                 sending = true;
+                //send data
                 Log.d("Accel","Front");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -415,5 +435,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public void autoManual(View view) {
+        if(!maprefresh){ //Manual to Auto
+            autoManual.setText("Auto");
+            refresh.setClickable(false);
+            refresh.setBackground(ContextCompat.getDrawable(this,R.drawable.rounded_button_clicked));
+            maprefresh = true;
+
+        }
+        else{// Auto to Manual
+            autoManual.setText("Manual");
+            refresh.setClickable(true);
+            refresh.setBackground(ContextCompat.getDrawable(this,R.drawable.rounded_button));
+            maprefresh = false;
+        }
+    }
+
+    public void refreshMap(View view) {
+        if(btDialog != null){
+            btDialog.maptest("");
+        }
+    }
+
+    public void setRobotCoordinates(View view) {
+        RobotDialog rDialog = new RobotDialog();
+        rDialog.show(getSupportFragmentManager(),"Robot");
     }
 }

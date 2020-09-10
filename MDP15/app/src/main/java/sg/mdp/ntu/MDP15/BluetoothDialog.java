@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +53,18 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     BluetoothConnectionService mBluetoothConnection;
     static Handler mHandler;
 
+    boolean loadmap = false;
+
     Button btnONOFF;
     Button btnScan;
     TextView tvStatus;
+    TextView bluetoothStatus;
+
+    SharedPreferences.Editor editor;
+    SharedPreferences pref;
+
+    String data;
+    int x,y;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -62,6 +73,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_bluetooth,null);
         tvStatus = (TextView)getActivity().findViewById(R.id.tbRobotStatus);
+        bluetoothStatus = (TextView)getActivity().findViewById(R.id.tbBT);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         btnONOFF = (Button)view.findViewById(R.id.btnONOFF);
@@ -74,6 +86,8 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         });
 
 
+        editor = getActivity().getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
+        pref = getActivity().getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
         lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,10 +117,10 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                             switch (msg.what) {
                                 case 1:
                                     try {
-                                        String str = msg.obj.toString();
-                                        JSONObject jobj = new JSONObject(str);
-                                        str = jobj.getString("status");
-                                        tvStatus.setText("Status: "+str);
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("status");
+                                        tvStatus.setText("Status: "+data);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -123,11 +137,38 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                 case 9:
                                     String str = "";
                                     try {
-                                        str = msg.obj.toString();
-                                        JSONObject jobj = new JSONObject(str);
-                                        str = jobj.getString("grid");
-                                        //maptest(str);
-                                        Log.d("BTMAZE",str);
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("grid");
+                                        editor.putString("AMDMDF",data);
+                                        editor.commit();
+                                        maptest(data);
+//                                        if(!loadmap){
+//                                            loadmap = true;
+//                                            maptest(str);
+//                                            new Handler().postDelayed(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    loadmap = false;
+//                                                }
+//                                            },1000);
+//                                        }
+
+                                        Log.d("BTMAZE",data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 10:
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("ID");
+                                        x = jobj.getInt("x");
+                                        y = jobj.getInt("y");
+                                        MainActivity.mazeManager.setGrid(x,y,data);
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -189,55 +230,40 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    private void maptest(String str) {
-        String mapdescriptor = str;
-        int currgrid = 0;
-        int currow = 19;
-        int digit = 0;
-        int x = 0, y= 0;
+
+    public void maptest(String str){
+        String mapdesriptor = pref.getString("AMDMF",str);
         String curr;
-        for(int j = 0 ; j < 75; j++){
-            curr = String.valueOf(mapdescriptor.charAt(j));
-            digit = Integer.parseInt(curr,16);
-            if(digit != 0){
-                if(digit >= 8){
-                    //1st block is an obstacle
-                    x = currow; //first row is 19
-                    y = currgrid; //first column is 0
-                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
-                    Log.d("Maze","x = "+x+" y = "+y);
-                    digit -= 8;
-                }
-                if(digit >= 4){
-                    //2nd block is an obstacle
-                    x = currow;
-                    y = currgrid+1;
-                    Log.d("Maze","x = "+currow+" y = "+y); //why is it giving me 01 and not 1
-                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
-                    digit -= 4;
-                }
-                if(digit >= 2){
-                    //3rd block is an obstacle
-                    x = currow;
-                    y = currgrid+2;
-                    Log.d("Maze","x = "+x+" y = "+y);
-                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
-                    digit -= 2;
-                }
-                if(digit == 1){
-                    x = currow;
-                    y = currgrid+3;
-                    if(y == 14){
-                        currgrid = -4;
-                        Log.d("Maze",currgrid+"");
-                    }
-                    //4th block is an obstacle
-                    Log.d("Maze","x = "+x+" y = "+y);
-                    MainActivity.mazeManager.setGrid(y,x,"Obstacle");
-                }
+        String mdf = "",mdfbin;
+        for(int j = 0; j < 75; j++){
+            curr = String.valueOf(mapdesriptor.charAt(j));
+            mdfbin = new BigInteger(curr,16).toString(2);
+            if(mdfbin.length() == 1)
+                mdfbin = "000" + mdfbin;
+            if(mdfbin.length() == 2)
+                mdfbin = "00" + mdfbin;
+            if(mdfbin.length() == 3)
+                mdfbin = "0" + mdfbin;
+            mdf = mdf + mdfbin;
+        }
+        Log.d("Maze",mdf);
+        //Plot Map
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
             }
-            currgrid = currgrid + 4;
-            currow--;
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
         }
     }
 
@@ -347,6 +373,10 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
     public void startBTConnection(BluetoothDevice device, UUID uuid){
         mBluetoothConnection.startClient(device,uuid);
+    }
+
+    public void reconnectBT(){
+        mBluetoothConnection.startClient(mBTDevice,mdpUUID);
     }
 
     public void senddata(String msg){

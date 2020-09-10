@@ -146,7 +146,7 @@ public class MazeManager {
         textView.setHeight(25);
         textView.setText(label);
         textView.setTextColor(context.getColor(android.R.color.white));
-        textView.setTextSize(18);
+        textView.setTextSize(14);
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         layout.addView(textView);

@@ -31,7 +31,7 @@
             android:layout_toLeftOf="@+id/tbRobotStatus"
             android:id="@+id/tbBT"
             android:layout_centerHorizontal="true"
-            android:text="Bluetooth: ON"
+            android:text="Bluetooth: Disconnected"
             />
         <TextView
             android:layout_width="200dp"
@@ -51,37 +51,66 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <Button
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start Explore"
-            android:id="@+id/btnSetStartPoint"
-            android:layout_toLeftOf="@id/btnSetEndPoint"
-            android:background="@drawable/rounded_button"
-            android:textColor="#FFFFFF"
-            android:onClick="startExplore"
-            android:layout_margin="10dp"/>
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Set Waypoint"
-            android:onClick="setWaypoint"
+            android:orientation="horizontal"
             android:layout_centerHorizontal="true"
-            android:id="@+id/btnSetEndPoint"
-            android:background="@drawable/rounded_button"
-            android:textColor="#FFFFFF"
-            android:layout_margin="10dp"/>
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Fastest Path"
-            android:layout_toRightOf="@id/btnSetEndPoint"
-            android:background="@drawable/rounded_button"
-            android:textColor="#FFFFFF"
-            android:layout_margin="10dp"
-            android:id="@+id/btnFastest"
-            android:onClick="FastestPath"/>
+            >
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Start Explore"
+                android:id="@+id/btnSetStartPoint"
+                android:background="@drawable/rounded_button"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                android:onClick="startExplore"
+                android:layout_margin="5dp"
+                />
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Set Waypoint"
+                android:onClick="setWaypoint"
+                android:id="@+id/btnSetEndPoint"
+                android:background="@drawable/rounded_button"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                android:layout_margin="5dp"
+                />
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Set Robot"
+                android:onClick="setRobotCoordinates"
+                android:id="@+id/btnSetRobot"
+                android:background="@drawable/rounded_button"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                android:layout_margin="5dp"
+                />
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Fastest Path"
+                android:layout_toRightOf="@id/btnSetEndPoint"
+                android:background="@drawable/rounded_button"
+                android:textColor="#FFFFFF"
+                android:id="@+id/btnFastest"
+                android:onClick="FastestPath"
+                android:textSize="12dp"
+                android:layout_margin="5dp"
+                />
+
+
+        </LinearLayout>
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -91,7 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RelativeLayout
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -99,7 +128,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Map Settings Placeholder"
+                    android:text="Map Refresh"
                     android:textSize="18dp"
                     android:id="@+id/mapsettingstitle"/>
                 <LinearLayout
@@ -111,17 +140,20 @@
                     <Button
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="Manual"
-                        android:layout_toRightOf="@id/btnSetEndPoint"
+                        android:text="Auto"
+                        android:onClick="autoManual"
+                        android:id="@+id/autoManaualbtn"
                         android:background="@drawable/rounded_button"
                         android:textColor="#FFFFFF"
                         android:layout_margin="10dp"/>
                     <Button
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="Auto"
-                        android:layout_toRightOf="@id/btnSetEndPoint"
-                        android:background="@drawable/rounded_button"
+                        android:text="Refresh"
+                        android:id="@+id/refreshbtn"
+                        android:onClick="refreshMap"
+                        android:clickable="false"
+                        android:background="@drawable/rounded_button_clicked"
                         android:textColor="#FFFFFF"
                         android:layout_margin="10dp"/>
                 </LinearLayout>
@@ -170,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:paddingTop="50dp"
+                android:paddingTop="40dp"
                 android:paddingBottom="20dp">
                 <ImageButton
                     android:layout_width="50dp"
