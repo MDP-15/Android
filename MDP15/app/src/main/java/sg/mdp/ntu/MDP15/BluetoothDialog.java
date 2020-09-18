@@ -10,10 +10,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +53,23 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     BluetoothConnectionService mBluetoothConnection;
     static Handler mHandler;
 
+    boolean loadmap = false;
+
     Button btnONOFF;
     Button btnScan;
     TextView tvStatus;
+    TextView bluetoothStatus;
+
+    SharedPreferences.Editor editor;
+    SharedPreferences pref;
+
+    SharedPreferences mdpAM;
+    SharedPreferences.Editor mdpAMEditor;
+
+    boolean mdpautomanaual;
+
+    String data;
+    int x,y;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -57,6 +78,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_bluetooth,null);
         tvStatus = (TextView)getActivity().findViewById(R.id.tbRobotStatus);
+        bluetoothStatus = (TextView)getActivity().findViewById(R.id.tbBT);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         btnONOFF = (Button)view.findViewById(R.id.btnONOFF);
@@ -69,6 +91,12 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         });
 
 
+        editor = getActivity().getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
+        pref = getActivity().getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
+
+        mdpAM = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE);
+        mdpAMEditor = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE).edit();
+        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
         lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,14 +125,73 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                             super.handleMessage(msg);
                             switch (msg.what) {
                                 case 1:
-                                    String message = msg.obj.toString();
-                                    tvStatus.setText(message);
-                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("status");
+                                        tvStatus.setText("Status: "+data);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     break;
                                 case 2:
-                                    //Update Map
-
+                                    //Update Map waypoint
+                                    //Get map coordinates
+                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
                                     break;
+                                case 3:
+                                    //Update Robot forward
+                                    MainActivity.robotManager.moveForward();
+                                    break;
+                                case 9:
+                                    String str = "";
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("grid");
+                                        editor.putString("AMDMDF",data);
+                                        editor.commit();
+                                        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
+                                        Log.d("MDF","boolean: "+ mdpautomanaual);
+                                        Log.d("AutoManaual",mdpautomanaual+"");
+                                        if(mdpautomanaual){
+
+                                            maptest(data);
+                                        }
+
+//                                        if(!loadmap){
+//                                            loadmap = true;
+//                                            maptest(str);
+//                                            new Handler().postDelayed(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    loadmap = false;
+//                                                }
+//                                            },1000);
+//                                        }
+
+                                        Log.d("BTMAZE",data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 10:
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("ID");
+                                        x = jobj.getInt("x");
+                                        y = jobj.getInt("y");
+                                        MainActivity.mazeManager.setGrid(x,y,data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                default:
+                                    break;
+
                             }
                         }
                     };
@@ -157,6 +244,43 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
+
+
+    public void maptest(String str){
+        String mapdesriptor = pref.getString("AMDMDF",str);
+        String curr;
+        String mdf = "",mdfbin;
+        for(int j = 0; j < 75; j++){
+            curr = String.valueOf(mapdesriptor.charAt(j));
+            mdfbin = new BigInteger(curr,16).toString(2);
+            if(mdfbin.length() == 1)
+                mdfbin = "000" + mdfbin;
+            if(mdfbin.length() == 2)
+                mdfbin = "00" + mdfbin;
+            if(mdfbin.length() == 3)
+                mdfbin = "0" + mdfbin;
+            mdf = mdf + mdfbin;
+        }
+        Log.d("Maze",mdf);
+        //Plot Map
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
+            }
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
+        }
     }
 
 
@@ -267,10 +391,19 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         mBluetoothConnection.startClient(device,uuid);
     }
 
+    public void reconnectBT(){
+        mBluetoothConnection.startClient(mBTDevice,mdpUUID);
+    }
+
     public void senddata(String msg){
-        if(mBluetoothConnection.getConnection()){
-            mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+        Log.d("BTDIALOG","trying to send data");
+        if(mBluetoothConnection != null){
+            if(mBluetoothConnection.getConnection()){
+                Log.d("BTDIALOG","trying to sending data");
+                mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+            }
         }
+
 
     }
 }

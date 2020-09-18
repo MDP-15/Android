@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Robot Coordinates"
+        android:padding="5dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="26dp"
+        android:textAlignment="center"
+        android:background="#6095FE"
+        android:textColor="#FFFFFF"
+        android:id="@+id/wayTitle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:textSize="20dp"
+        android:layout_below="@id/wayTitle"
+        android:padding="5dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:id="@+id/tvX"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvX"
+        android:layout_below="@id/wayTitle"
+        android:maxLength="1"
+        android:inputType="number"
+        android:text="0"
+        android:id="@+id/etrX"/>
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Y"
+    android:textSize="20dp"
+    android:layout_below="@id/tvX"
+    android:padding="5dp"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    android:id="@+id/tvY"
+    />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:text="0"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvX"
+        android:layout_below="@id/etrX"
+        android:maxLength="1"
+        android:id="@+id/etrY"
+        android:inputType="number"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Robot Coordinates"
+        android:id="@+id/btnSetRobotCoor"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"
+        android:padding="5dp"
+        android:layout_below="@id/etrY"
+        android:textColor="#FFFFFF"
+        android:background="#6095FE"/>
+
+
+</RelativeLayout>
