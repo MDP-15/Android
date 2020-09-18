@@ -152,7 +152,7 @@
                         android:text="Refresh"
                         android:id="@+id/refreshbtn"
                         android:onClick="refreshMap"
-                        android:clickable="false"
+                        android:enabled="false"
                         android:background="@drawable/rounded_button_clicked"
                         android:textColor="#FFFFFF"
                         android:layout_margin="10dp"/>

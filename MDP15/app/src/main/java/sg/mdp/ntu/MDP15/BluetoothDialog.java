@@ -63,6 +63,11 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     SharedPreferences.Editor editor;
     SharedPreferences pref;
 
+    SharedPreferences mdpAM;
+    SharedPreferences.Editor mdpAMEditor;
+
+    boolean mdpautomanaual;
+
     String data;
     int x,y;
 
@@ -88,6 +93,10 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
         editor = getActivity().getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
         pref = getActivity().getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
+
+        mdpAM = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE);
+        mdpAMEditor = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE).edit();
+        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
         lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -142,7 +151,14 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                         data = jobj.getString("grid");
                                         editor.putString("AMDMDF",data);
                                         editor.commit();
-                                        maptest(data);
+                                        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
+                                        Log.d("MDF","boolean: "+ mdpautomanaual);
+                                        Log.d("AutoManaual",mdpautomanaual+"");
+                                        if(mdpautomanaual){
+
+                                            maptest(data);
+                                        }
+
 //                                        if(!loadmap){
 //                                            loadmap = true;
 //                                            maptest(str);
@@ -232,7 +248,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
 
     public void maptest(String str){
-        String mapdesriptor = pref.getString("AMDMF",str);
+        String mapdesriptor = pref.getString("AMDMDF",str);
         String curr;
         String mdf = "",mdfbin;
         for(int j = 0; j < 75; j++){

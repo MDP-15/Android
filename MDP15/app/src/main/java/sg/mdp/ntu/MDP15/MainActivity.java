@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.pedromassango.doubleclick.DoubleClick;
 import com.pedromassango.doubleclick.DoubleClickListener;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import android.os.Handler;
 import android.os.Message;
@@ -91,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     String oldBg;
     String oldRes;
 
+    SharedPreferences mdpAM;
+    SharedPreferences.Editor mdpAMEditor;
+
+    SharedPreferences mdfpref;
+    SharedPreferences.Editor mdfprefeditor;
+
     boolean maprefresh;
 
 
@@ -108,7 +115,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //Accelerometer
         //initialize sensor manager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        
+
+
+        //Shared preference
+        mdpAM = getSharedPreferences("MDPAM",Context.MODE_PRIVATE);
+        mdpAMEditor = getSharedPreferences("MDPAM",Context.MODE_PRIVATE).edit();
+
+        mdfprefeditor = getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
+        mdfpref = getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
+
+        maprefresh = mdpAM.getBoolean("MDP_REFRESH",false);
         
 
         // robot
@@ -215,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         Log.d("MAINMAZE",oldRes);
                         Log.d("MAINMAZE",oldBg);
                         mazeManager.setGrid(finalK,finalJ,getString(R.string.maze_waypoint));
+                        btDialog.senddata("{\"Waypoint\":\"X\":"+finalK+","+"\"Y\":"+finalJ+"}");
                         curx = finalJ;
                         cury = finalK;
                     }
@@ -254,22 +271,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void up(View v){
-
+            robotManager.moveForward();
             btDialog.senddata("f");
 
     }
     public void down(View v){
-
+            robotManager.moveBack();
             btDialog.senddata("r");
 
     }
     public void left(View v){
-
+            robotManager.rotateLeft();
             btDialog.senddata("tl");
 
     }
     public void right(View v){
-
+            robotManager.rotateRight();
             btDialog.senddata("tr");
 
     }
@@ -340,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void onItemClick(AdapterView parent, View view, int position, long id) {
                             if (position == 0) {
                                 robotManager.setRobotCoordinates(finalK, finalJ);
-                                btDialog.senddata("{\"RobotPos\":\"X:"+finalK+"\""+"\"Y:"+finalJ+"\"}");
+                                btDialog.senddata("{\"RobotPos\":\"X\":"+finalK+","+"\"Y:"+finalJ+"\"}");
                             } else {
                                 openWaypoint(finalK,finalJ);
                             }
@@ -378,6 +395,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sending = true;
                 Log.d("Accel","Left");
                 //send data
+                robotManager.rotateLeft();
+                btDialog.senddata("tl");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -391,7 +410,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(!sending){
                 sending = true;
                 //send data
+                robotManager.rotateRight();
                 Log.d("Accel","Right");
+                btDialog.senddata("tr");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -405,6 +426,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(!sending){
                 sending = true;
                 //send data
+                robotManager.moveBack();
+                btDialog.senddata("r");
                 Log.d("Accel","Backward");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -419,6 +442,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if(!sending){
                 sending = true;
                 //send data
+                robotManager.moveForward();
+                btDialog.senddata("f");
                 Log.d("Accel","Front");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -440,22 +465,68 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void autoManual(View view) {
         if(!maprefresh){ //Manual to Auto
             autoManual.setText("Auto");
-            refresh.setClickable(false);
+            refresh.setEnabled(false);
             refresh.setBackground(ContextCompat.getDrawable(this,R.drawable.rounded_button_clicked));
             maprefresh = true;
+            mdpAMEditor.putBoolean("MDF_REFRESH",true); //Auto refresh map
+            mdpAMEditor.commit();
+            Log.d("AutoManual","true");
 
         }
         else{// Auto to Manual
             autoManual.setText("Manual");
-            refresh.setClickable(true);
+            refresh.setEnabled(true);
             refresh.setBackground(ContextCompat.getDrawable(this,R.drawable.rounded_button));
             maprefresh = false;
+            mdpAMEditor.putBoolean("MDF_REFRESH",false); //Manually refresh map
+            mdpAMEditor.commit();
+            Log.d("AutoManual","false");
         }
     }
 
     public void refreshMap(View view) {
-        if(btDialog != null){
-            btDialog.maptest("");
+        Log.d("MDF","BUTTON IS PRESSED");
+        plotMap();
+    }
+
+    private void plotMap(){
+        Log.d("MDF","IT BEGINS");
+        String mapdesriptor = mdfpref.getString("AMDMDF","");
+        Log.d("MDF",mapdesriptor);
+        if(mapdesriptor.equals("")){
+            return;
+        }
+        String curr;
+        String mdf = "",mdfbin;
+        for(int j = 0; j < 75; j++){
+            curr = String.valueOf(mapdesriptor.charAt(j));
+            mdfbin = new BigInteger(curr,16).toString(2);
+            if(mdfbin.length() == 1)
+                mdfbin = "000" + mdfbin;
+            if(mdfbin.length() == 2)
+                mdfbin = "00" + mdfbin;
+            if(mdfbin.length() == 3)
+                mdfbin = "0" + mdfbin;
+            mdf = mdf + mdfbin;
+        }
+        Log.d("Maze",mdf);
+        //Plot Map
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
+            }
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
         }
     }
 
