@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mdpAM = getSharedPreferences("MDPAM",Context.MODE_PRIVATE);
         mdpAMEditor = getSharedPreferences("MDPAM",Context.MODE_PRIVATE).edit();
 
+        mdpAMEditor.putBoolean("MDF_REFRESH",true); //Auto refresh map
+        mdpAMEditor.commit();
+
         mdfprefeditor = getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
         mdfpref = getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
 
@@ -133,13 +136,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         robot.setOnClickListener(new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
-                btDialog.senddata("tr");
+                //btDialog.senddata("tr");
                 robotManager.rotateRight();
+                btDialog.senddata("{\"MDP15\":\"O\",\"O\":\""+robotManager.getOrientation()+"\"}\n");
             }
             @Override
             public void onDoubleClick(View view) {
-                btDialog.senddata("tl");
+                //btDialog.senddata("tl");
                 robotManager.rotateLeft();
+                btDialog.senddata("{\"MDP15\":\"O\",\"O\":\""+robotManager.getOrientation()+"\"}\n");
             }
         }));
 
@@ -157,12 +162,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         toolbar = (Toolbar)findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
         btnSetStartPoint = (Button)findViewById(R.id.btnSetStartPoint);
-        btnSetStartPoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btDialog.senddata("f");
-            }
-        });
 
         //Get saved stuff
         pref = getSharedPreferences("MDP_FUNCTIONS",Context.MODE_PRIVATE);
@@ -248,6 +247,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         rfDialog.show(getSupportFragmentManager(),"Reconfigure");
     }
 
+    public void openMDFDialog(MenuItem item){
+        MDFDialog mdfDialog = new MDFDialog();
+        mdfDialog.show(getSupportFragmentManager(),"MDF");
+    }
+
     public void motionONOFF(MenuItem item){
         if(!motionONOFF){
             start();
@@ -266,45 +270,49 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         wpDialog.show(getSupportFragmentManager(),"Waypoint");
     }
 
-    public void startExplore(View view0){
+    public void startExplore(View view){
+        btDialog.senddata("{\"MDP15\":\"SE\"}");
+    }
 
+    public void startFastestPath(View view){
+        btDialog.senddata("{\"MDP15\":\"FP\"}");
     }
 
     public void up(View v){
             robotManager.moveForward();
-            btDialog.senddata("f");
+            btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"F1s\"}");
 
     }
     public void down(View v){
             robotManager.moveBack();
-            btDialog.senddata("r");
+            btDialog.senddata("nothing");
 
     }
     public void left(View v){
             robotManager.rotateLeft();
-            btDialog.senddata("tl");
+            btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"Ls\"}");
 
     }
     public void right(View v){
             robotManager.rotateRight();
-            btDialog.senddata("tr");
+            btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"Rs\"}");
 
     }
 
     public void sendfunction1(View view){
         //Get stored value
-        function1 = pref.getString("Function1","f");
+        function1 = pref.getString("Function1","F1");
 
-            btDialog.senddata(function1);
+            btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\""+function1+"\"}");
 
 
     }
 
     public void sendfunction2(View view){
         //Get stored value
-        function2 = pref.getString("Function2","r");
+        function2 = pref.getString("Function2","F1");
 
-            btDialog.senddata(function2);
+        btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\""+function2+"\"}");
 
     }
 
@@ -322,14 +330,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
                 Toast.makeText(getApplicationContext(), "Device is disconnected",       Toast.LENGTH_SHORT).show();
                 bluetoothStatus.setText("Bluetooth: Disconnected");
-               // btDialog.reconnectBT();
+                //btDialog.reconnectBT();
+
             }
         }
     };
-
-    public void FastestPath(View view) {
-            btDialog.senddata("beginExplore");
-    }
 
     private void createMap() {
         int j = 19;
@@ -357,7 +362,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         public void onItemClick(AdapterView parent, View view, int position, long id) {
                             if (position == 0) {
                                 robotManager.setRobotCoordinates(finalK, finalJ);
-                                btDialog.senddata("{\"RobotPos\":\"X\":"+finalK+","+"\"Y:"+finalJ+"\"}");
+                                //String data = "{\"RobotPos\":\"X\":"+finalK+",\"Y\":"+finalJ+",\"Orientation\":"+"\""+robotManager.getOrientation()+"\"}";
+                                btDialog.senddata("{\"MDP15\":\"RP\":\"X\":"+finalK+",\"Y\":"+finalJ+",\"O\":\""+robotManager.getOrientation()+"\"}\n");
                             } else {
                                 openWaypoint(finalK,finalJ);
                             }
@@ -396,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Log.d("Accel","Left");
                 //send data
                 robotManager.rotateLeft();
-                btDialog.senddata("tl");
+                btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"Ls\"}");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -412,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 //send data
                 robotManager.rotateRight();
                 Log.d("Accel","Right");
-                btDialog.senddata("tr");
+                btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"Rs\"}");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -427,7 +433,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sending = true;
                 //send data
                 robotManager.moveBack();
-                btDialog.senddata("r");
+                btDialog.senddata("nothing");
                 Log.d("Accel","Backward");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -443,7 +449,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sending = true;
                 //send data
                 robotManager.moveForward();
-                btDialog.senddata("f");
+                btDialog.senddata("{\"MDP15\":\"RI\",\"RI\":\"F1s\"}");
                 Log.d("Accel","Front");
                 new Handler().postDelayed(new Runnable() {
                     @Override

@@ -28,16 +28,18 @@ public class BluetoothConnectionService {
     private BluetoothDevice mmDevice;
     private UUID deviceUUID;
     ProgressDialog mProgressDialog;
+    private BluetoothDialog btdialog;
 
     private ConnectedThread mConnectedThread;
 
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
 
-    public BluetoothConnectionService(Context context, Handler handler){
+    public BluetoothConnectionService(Context context, Handler handler, BluetoothDialog btdialog){
         mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mhandler = handler;
+        this.btdialog = btdialog;
         start();
     }
 
@@ -182,7 +184,7 @@ public class BluetoothConnectionService {
     public void startClient(BluetoothDevice device, UUID uuid){
         Log.d(TAG,"startClient: started.");
 
-        mProgressDialog = ProgressDialog.show(mContext,"Connecting Bluetooth","Please wait...",true);
+       // mProgressDialog = ProgressDialog.show(mContext,"Connecting Bluetooth","Please wait...",true);
 
         mConnectThread = new ConnectThread(device,uuid);
         mConnectThread.start();
@@ -235,33 +237,34 @@ public class BluetoothConnectionService {
                 try {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer,0,bytes);
+                    //System.out.println(incomingMessage);
                     Log.d(TAG,"InputStream: "+incomingMessage);
-                    if(incomingMessage.contains("status"))
+                    if(incomingMessage.contains("STATUS"))
                         mhandler.obtainMessage(1,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("MAP_WAYPOINT")))
-                        mhandler.obtainMessage(2,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_FORWARD")))
+                    if(incomingMessage.contains(("ROBOT_INSTRUCTION")))
                         mhandler.obtainMessage(3,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_RR")))
-                        mhandler.obtainMessage(4,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_RL")))
-                        mhandler.obtainMessage(5,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_BACK")))
-                        mhandler.obtainMessage(6,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_START")))
+                    if(incomingMessage.contains(("MDF")))
                         mhandler.obtainMessage(7,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("MAP_OBSTACLE")))
+                    if(incomingMessage.contains(("MDF1")))
                         mhandler.obtainMessage(8,incomingMessage).sendToTarget();
                     if(incomingMessage.contains(("grid")))
                         mhandler.obtainMessage(9,incomingMessage).sendToTarget();
                     if(incomingMessage.contains("ID"))
                         mhandler.obtainMessage(10,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("ImageRec")){
+                        mhandler.obtainMessage(11,incomingMessage).sendToTarget();
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG,"write: Error reading to inputstream "+e.getMessage());
+                   //btdialog.startBTConnection(mmDevice,mdpUUID);
+                    disconnect();
+                    startNew();
                     break;
+
                     //Bluetooth connection died.
+
 
                 }
             }
@@ -282,6 +285,38 @@ public class BluetoothConnectionService {
                 mmSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        public synchronized void disconnect() {
+            if (mConnectedThread != null) {
+                mConnectedThread.cancel();
+                mConnectedThread = null;
+            }
+
+            if (mConnectThread != null) {
+                mConnectThread.cancel();
+                mConnectThread = null;
+            }
+
+            if (mInsecureAcceptThread != null) {
+                mInsecureAcceptThread.cancel();
+                mInsecureAcceptThread = null;
+            }
+        }
+
+        public synchronized  void startNew() {
+            Log.d(TAG, "start");
+
+            //Cancel any thread attempting to make a connection
+            if (mConnectThread != null) {
+                mConnectThread.cancel();
+                mConnectThread = null;
+            }
+            if (mInsecureAcceptThread == null) {
+                Log.e(TAG, "Creating a new accept thread...");
+                mInsecureAcceptThread = new AcceptThread();
+                mInsecureAcceptThread.start();
             }
         }
     }

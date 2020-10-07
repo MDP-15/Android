@@ -26,11 +26,36 @@ public class RobotDialog extends AppCompatDialogFragment {
 
         setRobotCoor = (Button)view.findViewById(R.id.btnSetRobotCoor);
         setRobotCoor.setOnClickListener(new View.OnClickListener() {
+            int mazeX = 0;
+            int mazeY = 0;
             @Override
             public void onClick(View v) {
-                int mazeX = Integer.parseInt(x.getText().toString());
-                int mazeY = Integer.parseInt(y.getText().toString());
+                if(!x.getText().toString().equals("") && !y.getText().toString().equals("")) {
+                    System.out.println("WAYPOINTX: inside IF loop");
+                    mazeX = Integer.parseInt(x.getText().toString());
+                    mazeY = Integer.parseInt(y.getText().toString());
+                }else if(x.getText().toString().equals("") && y.getText().toString().equals("")){
+                    mazeX = 1;
+                    mazeY = 1;
+                }
+                else if(x.getText().toString().equals("")){
+                    System.out.println("WAYPOINTX: INSIDE X");
+                    mazeX = 0;
+                    mazeY = Integer.parseInt(y.getText().toString());
+                    System.out.println("WAYPOINTX: "+mazeX);
+                }
+                else if(y.getText().toString().equals("")){
+                    System.out.println("WAYPOINTX: INSIDE Y");
+                    mazeY = 0;
+                    mazeX = Integer.parseInt(x.getText().toString());
+                    System.out.println("WAYPOINTX: "+mazeY);
+                }
+                if(mazeX == 0 && mazeY == 0){
+                    mazeX = 1;
+                    mazeY = 1;
+                }
                 MainActivity.robotManager.setRobotCoordinates(mazeX,mazeY);
+                MainActivity.btDialog.senddata("{\"MDP15\":\"RP\":\"X\":"+mazeX+",\"Y\":"+mazeY+",\"O\":\""+MainActivity.robotManager.getOrientation()+"\"}\n");
                 dismiss();
             }
         });

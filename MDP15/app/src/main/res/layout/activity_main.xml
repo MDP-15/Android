@@ -46,7 +46,30 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/maze_layout" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relativeMaze">
+            <include layout="@layout/maze_layout" />
+        </RelativeLayout>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toLeftOf="@id/relativeMaze"-->
+<!--            android:textSize="21dp"-->
+<!--            android:text="19\n18\n17\n16\n15\n14\n13\n12\n11\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/relativeMaze"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:textSize="18dp"-->
+<!--            android:letterSpacing="0.1"-->
+<!--            android:text="0   1   2   3   4   5   6   7   8   9 10 11 12 13 14"/>-->
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -102,7 +125,7 @@
                 android:background="@drawable/rounded_button"
                 android:textColor="#FFFFFF"
                 android:id="@+id/btnFastest"
-                android:onClick="FastestPath"
+                android:onClick="startFastestPath"
                 android:textSize="12dp"
                 android:layout_margin="5dp"
                 />

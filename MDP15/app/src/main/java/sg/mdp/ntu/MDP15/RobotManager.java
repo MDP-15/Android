@@ -26,6 +26,20 @@ public class RobotManager {
         this.orientation = Orientation.RIGHT;
     }
 
+    public String getOrientation(){
+        switch (orientation){
+            case LEFT:
+                return "LEFT";
+            case RIGHT:
+                return "RIGHT";
+            case UP:
+                return "UP";
+            case DOWN:
+                return "DOWN";
+        }
+        return null;
+    }
+
     public void setRobotCoordinates(int x, int y) {
         if (x < 1) {
             x = 1;
