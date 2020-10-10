@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         Log.d("MAINMAZE",oldRes);
                         Log.d("MAINMAZE",oldBg);
                         mazeManager.setGrid(finalK,finalJ,getString(R.string.maze_waypoint));
-                        btDialog.senddata("{\"Waypoint\":\"X\":"+finalK+","+"\"Y\":"+finalJ+"}");
+                        btDialog.senddata("{\"MDP15\":\"W\",\"X\":" + finalK + ",\"Y\":" + finalJ + "}");
                         curx = finalJ;
                         cury = finalK;
                     }
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void startFastestPath(View view){
-        btDialog.senddata("{\"MDP15\":\"FP\"}");
+        btDialog.senddata("{\"MDP15\":\"SF\"}");
     }
 
     public void up(View v){
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
     public void down(View v){
             robotManager.moveBack();
-            btDialog.senddata("nothing");
+            //btDialog.senddata("nothing");
 
     }
     public void left(View v){
@@ -363,7 +363,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             if (position == 0) {
                                 robotManager.setRobotCoordinates(finalK, finalJ);
                                 //String data = "{\"RobotPos\":\"X\":"+finalK+",\"Y\":"+finalJ+",\"Orientation\":"+"\""+robotManager.getOrientation()+"\"}";
-                                btDialog.senddata("{\"MDP15\":\"RP\":\"X\":"+finalK+",\"Y\":"+finalJ+",\"O\":\""+robotManager.getOrientation()+"\"}\n");
+                                btDialog.senddata("{\"MDP15\":\"RP\",\"X\":"+finalK+",\"Y\":"+finalJ+",\"O\":\""+robotManager.getOrientation()+"\"}");
                             } else {
                                 openWaypoint(finalK,finalJ);
                             }
@@ -433,7 +433,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 sending = true;
                 //send data
                 robotManager.moveBack();
-                btDialog.senddata("nothing");
+                //btDialog.senddata("nothing");
                 Log.d("Accel","Backward");
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -502,25 +502,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(mapdesriptor.equals("")){
             return;
         }
+//        String curr;
+//        String mdf = "",mdfbin;
+//        for(int j = 0; j < 75; j++){
+//            curr = String.valueOf(mapdesriptor.charAt(j));
+//            mdfbin = new BigInteger(curr,16).toString(2);
+//            if(mdfbin.length() == 1)
+//                mdfbin = "000" + mdfbin;
+//            if(mdfbin.length() == 2)
+//                mdfbin = "00" + mdfbin;
+//            if(mdfbin.length() == 3)
+//                mdfbin = "0" + mdfbin;
+//            mdf = mdf + mdfbin;
+//        }
         String curr;
-        String mdf = "",mdfbin;
-        for(int j = 0; j < 75; j++){
-            curr = String.valueOf(mapdesriptor.charAt(j));
-            mdfbin = new BigInteger(curr,16).toString(2);
-            if(mdfbin.length() == 1)
-                mdfbin = "000" + mdfbin;
-            if(mdfbin.length() == 2)
-                mdfbin = "00" + mdfbin;
-            if(mdfbin.length() == 3)
-                mdfbin = "0" + mdfbin;
-            mdf = mdf + mdfbin;
-        }
+        String mdf = mapdesriptor;
         Log.d("Maze",mdf);
         //Plot Map
         int column = 19, row = 0;
         for(int k = 0; k < mdf.length(); k++){
             curr = String.valueOf(mdf.charAt(k));
-            if(curr.equals("1")){
+            if(curr.equals("2")){
+                MainActivity.mazeManager.setGrid(row,column,"Unexplored");
+            }
+            else if(curr.equals("1")){
                 MainActivity.mazeManager.setGrid(row,column,"Obstacle");
 
             }

@@ -147,7 +147,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                     try {
                                         data = msg.obj.toString();
                                         JSONObject jobj = new JSONObject(data);
-                                        data = jobj.getString("ROBOT_INSTRUCTION");
+                                        data = jobj.getString("RI");
                                         switch (data){
                                             case "F1": MainActivity.robotManager.moveForward(); break;
                                             case "F2": MainActivity.robotManager.moveForward();
@@ -180,14 +180,14 @@ public class BluetoothDialog extends AppCompatDialogFragment {
 
                                         editor.putString("MDF1",MDF1);
                                         editor.putString("MDF2",MDF2);
-                                        editor.putString("AMDMDF",MDF3);
+                                        editor.putString("AMDMDF",mapmap);
                                         editor.commit();
                                         mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
                                         Log.d("MDF","boolean: "+ mdpautomanaual);
                                         Log.d("AutoManaual",mdpautomanaual+"");
                                         if(mdpautomanaual){
 
-                                            maptest(data);
+                                            maptest2(data);
                                         }
                                         Log.d("BTMAZE",data);
 
@@ -399,6 +399,46 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         for(int k = 0; k < mdf.length(); k++){
             curr = String.valueOf(mdf.charAt(k));
             if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
+            }
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
+        }
+    }
+
+    public void maptest2(String str){
+        String mapdesriptor = pref.getString("AMDMDF",str);
+        String curr;
+//        String mdf = "",mdfbin;
+//        for(int j = 0; j < 75; j++){
+//            curr = String.valueOf(mapdesriptor.charAt(j));
+//            mdfbin = new BigInteger(curr,16).toString(2);
+//            if(mdfbin.length() == 1)
+//                mdfbin = "000" + mdfbin;
+//            if(mdfbin.length() == 2)
+//                mdfbin = "00" + mdfbin;
+//            if(mdfbin.length() == 3)
+//                mdfbin = "0" + mdfbin;
+//            mdf = mdf + mdfbin;
+//        }
+//        Log.d("Maze",mdf);
+        //Plot Map
+        String mdf = mapdesriptor;
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("2")){
+                MainActivity.mazeManager.setGrid(row,column,"Unexplored");
+            }
+            else if(curr.equals("1")){
                 MainActivity.mazeManager.setGrid(row,column,"Obstacle");
 
             }

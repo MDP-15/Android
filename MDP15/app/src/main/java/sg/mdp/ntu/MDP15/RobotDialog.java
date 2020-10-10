@@ -55,7 +55,7 @@ public class RobotDialog extends AppCompatDialogFragment {
                     mazeY = 1;
                 }
                 MainActivity.robotManager.setRobotCoordinates(mazeX,mazeY);
-                MainActivity.btDialog.senddata("{\"MDP15\":\"RP\":\"X\":"+mazeX+",\"Y\":"+mazeY+",\"O\":\""+MainActivity.robotManager.getOrientation()+"\"}\n");
+                MainActivity. btDialog.senddata("{\"MDP15\":\"RP\",\"X\":"+mazeX+",\"Y\":"+mazeY+",\"O\":\""+MainActivity.robotManager.getOrientation()+"\"}");
                 dismiss();
             }
         });

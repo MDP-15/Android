@@ -44,7 +44,13 @@ public class BluetoothConnectionService {
     }
 
     public boolean getConnection(){
-        return  mConnectedThread.mmSocket.isConnected();
+        if(mConnectedThread.mmSocket != null){
+            return  mConnectedThread.mmSocket.isConnected();
+        }
+        else {
+            System.out.println("No connection");
+            return false;
+        }
     }
 
     //this thread runs while listening for incoming connections.
@@ -229,7 +235,7 @@ public class BluetoothConnectionService {
         }
 
         public void run(){
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
 
             int bytes;
 
@@ -241,7 +247,7 @@ public class BluetoothConnectionService {
                     Log.d(TAG,"InputStream: "+incomingMessage);
                     if(incomingMessage.contains("STATUS"))
                         mhandler.obtainMessage(1,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains(("ROBOT_INSTRUCTION")))
+                    if(incomingMessage.contains(("RI")))
                         mhandler.obtainMessage(3,incomingMessage).sendToTarget();
                     if(incomingMessage.contains(("MDF")))
                         mhandler.obtainMessage(7,incomingMessage).sendToTarget();

@@ -60,7 +60,7 @@ public class WaypointDialog extends AppCompatDialogFragment {
                     mazeY = 1;
                 }
                 MainActivity.mazeManager.setGrid(mazeX, mazeY, "Waypoint");
-                MainActivity.btDialog.senddata("{\"MDP15\":\"W\",\"X\":" + mazeX + ",\"Y\":" + mazeY + "}\n");
+                MainActivity.btDialog.senddata("{\"MDP15\":\"W\",\"X\":" + mazeX + ",\"Y\":" + mazeY + "}");
                 dismiss();
             }
         });
