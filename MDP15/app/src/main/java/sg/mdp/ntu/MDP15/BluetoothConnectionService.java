@@ -43,14 +43,36 @@ public class BluetoothConnectionService {
         start();
     }
 
-    public boolean getConnection(){
+    public void closeeverything(){
         if(mConnectedThread.mmSocket != null){
-            return  mConnectedThread.mmSocket.isConnected();
+            try{
+                mConnectedThread.mmSocket.close();
+            }catch(IOException ex){
+
+            }
         }
-        else {
-            System.out.println("No connection");
-            return false;
+
+//        if(mConnectThread.mmSocket != null){
+//            try{
+//                mConnectThread.mmSocket.close();
+//            }catch(IOException ex){
+//
+//            }
+//
+//        }
+    }
+
+    public boolean getConnection(){
+        if(mConnectedThread != null){
+            if(mConnectedThread.mmSocket != null){
+                return  mConnectedThread.mmSocket.isConnected();
+            }
+            else {
+                System.out.println("No connection");
+                return false;
+            }
         }
+        return false;
     }
 
     //this thread runs while listening for incoming connections.
@@ -257,7 +279,7 @@ public class BluetoothConnectionService {
                         mhandler.obtainMessage(9,incomingMessage).sendToTarget();
                     if(incomingMessage.contains("ID"))
                         mhandler.obtainMessage(10,incomingMessage).sendToTarget();
-                    if(incomingMessage.contains("ImageRec")){
+                    if(incomingMessage.contains("IR")){
                         mhandler.obtainMessage(11,incomingMessage).sendToTarget();
                     }
 

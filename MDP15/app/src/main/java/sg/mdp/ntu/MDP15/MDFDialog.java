@@ -19,8 +19,9 @@ public class MDFDialog extends AppCompatDialogFragment {
 
 
     SharedPreferences pref;
-    TextView tvMDF1;
-    TextView tvMDF2;
+    EditText tvMDF1;
+    EditText tvMDF2;
+    EditText tvImageString;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -31,14 +32,23 @@ public class MDFDialog extends AppCompatDialogFragment {
 
         pref = getActivity().getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE);
 
-        tvMDF1 = (TextView)view.findViewById(R.id.tvMDF1bin);
-        tvMDF2 = (TextView)view.findViewById(R.id.tvMDF2bin);
+        tvMDF1 = (EditText) view.findViewById(R.id.tvMDF1bin);
+        tvMDF2 = (EditText) view.findViewById(R.id.tvMDF2bin);
+        tvImageString = (EditText) view.findViewById(R.id.tvimagestring);
 
         String MDF1 = pref.getString("MDF1","00000000000000000000000000000000000000000000000000000000000000000000");
         String MDF2 = pref.getString("MDF2","00000000000000000000000000000000000000000000000000000000000000000000");
+        String images = pref.getString("Images","images");
+        images = images.replace(";","\n");
+        images = images.replace("{","(");
+        images = images.replace("}",")");
+        images = images.replace("ID:","");
+        images = images.replace("X:","");
+        images = images.replace("Y:","");
 
         tvMDF1.setText(MDF1);
         tvMDF2.setText(MDF2);
+        tvImageString.setText(images);
         return builder.create();
     }
 }

@@ -170,17 +170,20 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                         JSONObject jobj = new JSONObject(data);
                                         data = jobj.getString("MDF");
                                         String mapmap = data;
+                                        editor.putString("AMDMDF",mapmap);
+                                        mapmap = reverseMDF(mapmap);
                                         String MDF1 = mapmap;
                                         String MDF2 = mapmap;
                                         String MDF3 = mapmap;
 
                                         MDF1 = convertMDF1(MDF1);
+                                        System.out.println("MDF1 "+MDF1);
                                         MDF2 = convertMDF2(MDF2);
+                                        System.out.println("MDF2:"+MDF2);
                                         MDF3 = convertMDF3(MDF3);
 
                                         editor.putString("MDF1",MDF1);
                                         editor.putString("MDF2",MDF2);
-                                        editor.putString("AMDMDF",mapmap);
                                         editor.commit();
                                         mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
                                         Log.d("MDF","boolean: "+ mdpautomanaual);
@@ -206,7 +209,9 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                         String MDF3 = mapmap;
 
                                         MDF1 = convertMDF1(MDF1);
+                                        System.out.println("MDF1: "+MDF1);
                                         MDF2 = convertMDF2(MDF2);
+                                        System.out.println("MDF2: "+MDF2);
                                         MDF3 = convertMDF3(MDF3);
 
                                         editor.putString("MDF1",MDF1);
@@ -261,9 +266,30 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                                     break;
                                 case 11: //Image Rec
                                     try {
+                                        //{"MDP15":"IR","Images"
                                         data = msg.obj.toString();
                                         JSONObject jobj = new JSONObject(data);
-                                        data = jobj.getString("Name");
+                                        String imageobj  = jobj.getString("Images");
+                                        System.out.println(imageobj);
+                                        //imageobj = imageobj.replace("}","};");
+                                        //imageobj = imageobj.substring(0,imageobj.length()-1);
+                                        System.out.println(imageobj);
+                                        editor.putString("Images",imageobj);
+                                        editor.commit();
+                                        String[] array = imageobj.split(";");
+                                        for(int i = 0; i < array.length; i++){
+                                            String item = array[i];
+                                            item = item+"}";
+                                            item = item.replace("(","{");
+                                            item = item.replace(")","}");
+                                            //images.add(new JSONObject(item));
+                                            JSONObject ir = new JSONObject(item);
+                                            System.out.println(ir.toString());
+                                            int x = ir.getInt("X");
+                                            int y = ir.getInt("Y");
+                                            String id = ir.getString("ID");
+                                            MainActivity.mazeManager.setGrid(x,y,id);
+                                        }
                                         String name = jobj.getString("Image");
                                         x = jobj.getInt("x");
                                         y = jobj.getInt("y");
@@ -329,7 +355,18 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         builder.setView(view);
         return builder.create();
     }
-
+    private String reverseMDF(String mdf){
+        String reverseMDF = "";
+        String row = "";
+        for(int i = 0; i < mdf.length(); i = i+15) {
+            row = "";
+            for (int k = 0; k < 15; k++) {
+                row = row + mdf.charAt(i + k);
+            }
+            reverseMDF = row + reverseMDF;
+        }
+        return reverseMDF;
+    }
 
 
     private String convertMDF1(String mdf) {
@@ -471,7 +508,17 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         }
         if (mBluetoothAdapter.isEnabled()) {
             Log.d(TAG,"enableDisableBT: disabling BT");
-            mBluetoothAdapter.disable();
+            if(mBluetoothAdapter.isDiscovering()){
+                mBluetoothAdapter.cancelDiscovery();
+            }
+            if(mBluetoothConnection != null){
+                mBluetoothConnection.closeeverything();
+            }
+
+            if(mBluetoothAdapter != null){
+                mBluetoothAdapter.disable();
+            }
+
 
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             requireActivity().registerReceiver(receiver,BTIntent);

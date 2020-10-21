@@ -20,7 +20,7 @@
         app:showAsAction="never"
         android:onClick="motionONOFF"/>
     <item
-        android:title="MDF"
+        android:title="MDF and Images"
         android:id="@+id/btnMDF"
         app:showAsAction="never"
         android:onClick="openMDFDialog"/>

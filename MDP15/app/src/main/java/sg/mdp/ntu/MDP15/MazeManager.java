@@ -62,7 +62,7 @@ public class MazeManager {
         if (layout.getChildCount() > 1) {  // remove text views if exist
             layout.removeViewAt(1);
         }
-        if (label.length() == 1) {
+        if (label.length() <= 2) {
             setText(layout, context, label);  // if it is a single character string, directly put it
         } else {
             if (label.equals(context.getString(R.string.maze_go))) {
