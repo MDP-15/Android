@@ -10,10 +10,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +53,26 @@ public class BluetoothDialog extends AppCompatDialogFragment {
     BluetoothConnectionService mBluetoothConnection;
     static Handler mHandler;
 
+    boolean loadmap = false;
+
     Button btnONOFF;
     Button btnScan;
     TextView tvStatus;
+    TextView bluetoothStatus;
+
+
+    //MDF
+    SharedPreferences.Editor editor;
+    SharedPreferences pref;
+
+    //Auto Manual
+    SharedPreferences mdpAM;
+    SharedPreferences.Editor mdpAMEditor;
+
+    boolean mdpautomanaual;
+
+    String data;
+    int x,y;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -57,6 +81,7 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_bluetooth,null);
         tvStatus = (TextView)getActivity().findViewById(R.id.tbRobotStatus);
+        bluetoothStatus = (TextView)getActivity().findViewById(R.id.tbBT);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         btnONOFF = (Button)view.findViewById(R.id.btnONOFF);
@@ -69,6 +94,12 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         });
 
 
+        editor = getActivity().getSharedPreferences("MDP_MDF", Context.MODE_PRIVATE).edit();
+        pref = getActivity().getSharedPreferences("MDP_MDF",Context.MODE_PRIVATE);
+
+        mdpAM = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE);
+        mdpAMEditor = getActivity().getSharedPreferences("MDPAM",Context.MODE_PRIVATE).edit();
+        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
 
         lvNewDevices = (ListView)view.findViewById(R.id.lvNewDevices);
         lvNewDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,18 +127,186 @@ public class BluetoothDialog extends AppCompatDialogFragment {
                         public void handleMessage(Message msg) {
                             super.handleMessage(msg);
                             switch (msg.what) {
-                                case 1:
-                                    String message = msg.obj.toString();
-                                    tvStatus.setText(message);
+                                case 1: //Get robot status and setting it onto the textview
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("status");
+                                        tvStatus.setText("Status: "+data);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     break;
-                                case 2:
-                                    //Update Map
+                                case 2://Android not receiving Waypoint only sending so this is not needed.
+                                    //Update Map waypoint
+                                    //Get map coordinates
+                                    MainActivity.mazeManager.setGrid(4,4,"Waypoint");
                                     break;
+                                case 3:
+                                    //Move robot according to exploration
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("RI");
+                                        switch (data){
+                                            case "F1": MainActivity.robotManager.moveForward(); break;
+                                            case "F2": MainActivity.robotManager.moveForward();
+                                                        MainActivity.robotManager.moveForward();
+                                                        break;
+                                            case "F3": MainActivity.robotManager.moveForward();
+                                                        MainActivity.robotManager.moveForward();
+                                                        MainActivity.robotManager.moveForward();
+                                                        break;
+                                            case "L": MainActivity.robotManager.rotateLeft(); break;
+                                            case "R":MainActivity.robotManager.rotateRight(); break;
+                                        }
+                                    }catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 7: //Receiving mdf to update gridview
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("MDF");
+                                        String mapmap = data;
+                                        editor.putString("AMDMDF",mapmap);
+                                        mapmap = reverseMDF(mapmap);
+                                        String MDF1 = mapmap;
+                                        String MDF2 = mapmap;
+                                        String MDF3 = mapmap;
+
+                                        MDF1 = convertMDF1(MDF1);
+                                        System.out.println("MDF1 "+MDF1);
+                                        MDF2 = convertMDF2(MDF2);
+                                        System.out.println("MDF2:"+MDF2);
+                                        MDF3 = convertMDF3(MDF3);
+
+                                        editor.putString("MDF1",MDF1);
+                                        editor.putString("MDF2",MDF2);
+                                        editor.commit();
+                                        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
+                                        Log.d("MDF","boolean: "+ mdpautomanaual);
+                                        Log.d("AutoManaual",mdpautomanaual+"");
+                                        if(mdpautomanaual){
+
+                                            maptest2(data);
+                                        }
+                                        Log.d("BTMAZE",data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 8: //Receiving mdf to update gridview
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("grid");
+                                        String mapmap = data;
+                                        String MDF1 = mapmap;
+                                        String MDF2 = mapmap;
+                                        String MDF3 = mapmap;
+
+                                        MDF1 = convertMDF1(MDF1);
+                                        System.out.println("MDF1: "+MDF1);
+                                        MDF2 = convertMDF2(MDF2);
+                                        System.out.println("MDF2: "+MDF2);
+                                        MDF3 = convertMDF3(MDF3);
+
+                                        editor.putString("MDF1",MDF1);
+                                        editor.putString("MDF2",MDF2);
+                                        editor.putString("AMDMDF",MDF3);
+                                        editor.commit();
+                                        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
+                                        Log.d("MDF","boolean: "+ mdpautomanaual);
+                                        Log.d("AutoManaual",mdpautomanaual+"");
+                                        if(mdpautomanaual){
+
+                                            maptest(data);
+                                        }
+                                        Log.d("BTMAZE",data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 9: //Receiving mdf to update gridview
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("grid");
+                                        editor.putString("AMDMDF",data);
+                                        editor.commit();
+                                        mdpautomanaual = mdpAM.getBoolean("MDF_REFRESH",true);
+                                        Log.d("MDF","boolean: "+ mdpautomanaual);
+                                        Log.d("AutoManaual",mdpautomanaual+"");
+                                        if(mdpautomanaual){
+
+                                            maptest(data);
+                                        }
+                                        Log.d("BTMAZE",data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 10: //Image Rec
+                                    try {
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        data = jobj.getString("ID");
+                                        x = jobj.getInt("x");
+                                        y = jobj.getInt("y");
+                                        MainActivity.mazeManager.setGrid(x,y,data);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 11: //Image Rec
+                                    try {
+                                        //{"MDP15":"IR","Images"
+                                        data = msg.obj.toString();
+                                        JSONObject jobj = new JSONObject(data);
+                                        String imageobj  = jobj.getString("Images");
+                                        System.out.println(imageobj);
+                                        //imageobj = imageobj.replace("}","};");
+                                        //imageobj = imageobj.substring(0,imageobj.length()-1);
+                                        System.out.println(imageobj);
+                                        editor.putString("Images",imageobj);
+                                        editor.commit();
+                                        String[] array = imageobj.split(";");
+                                        for(int i = 0; i < array.length; i++){
+                                            String item = array[i];
+                                            item = item+"}";
+                                            item = item.replace("(","{");
+                                            item = item.replace(")","}");
+                                            //images.add(new JSONObject(item));
+                                            JSONObject ir = new JSONObject(item);
+                                            System.out.println(ir.toString());
+                                            int x = ir.getInt("X");
+                                            int y = ir.getInt("Y");
+                                            String id = ir.getString("ID");
+                                            MainActivity.mazeManager.setGrid(x,y,id);
+                                        }
+                                        String name = jobj.getString("Image");
+                                        x = jobj.getInt("x");
+                                        y = jobj.getInt("y");
+                                        MainActivity.mazeManager.setGrid(x,y,name);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                default:
+                                    break;
+
                             }
                         }
                     };
 
-                    mBluetoothConnection = new BluetoothConnectionService(getActivity(),mHandler);
+                    mBluetoothConnection = new BluetoothConnectionService(getActivity(),mHandler,BluetoothDialog.this);
                     if(mBTDevices.get(position).getBondState() == BluetoothDevice.BOND_BONDING){
                         // tvStatus.setText("Pairing");
                         Log.d(TAG,"BroadcastReceiver4: Pairing");
@@ -156,6 +355,141 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         builder.setView(view);
         return builder.create();
     }
+    private String reverseMDF(String mdf){
+        String reverseMDF = "";
+        String row = "";
+        for(int i = 0; i < mdf.length(); i = i+15) {
+            row = "";
+            for (int k = 0; k < 15; k++) {
+                row = row + mdf.charAt(i + k);
+            }
+            reverseMDF = row + reverseMDF;
+        }
+        return reverseMDF;
+    }
+
+
+    private String convertMDF1(String mdf) {
+        String MDF1 = mdf;
+        MDF1 = MDF1.replace("1", "1");
+        MDF1 = MDF1.replace("0", "1");
+        MDF1 = MDF1.replace("2", "0");
+        MDF1 = "11" + MDF1 + "11";
+        MDF1 = convertMDFHex(MDF1);
+        return MDF1;
+    }
+    private String convertMDF2(String mdf) {
+        String MDF2 = mdf;
+        MDF2 = MDF2.replace("2","");
+        while(MDF2.length()%8 != 0) {
+            MDF2 = MDF2 +"0";
+        }
+        MDF2 = convertMDFHex(MDF2);
+        return MDF2;
+
+    }
+    private String convertMDF3(String mdf) {
+        String MDF3 = mdf;
+        MDF3 = MDF3.replace("2","0");
+        MDF3 = convertMDFHex(MDF3);
+        return MDF3;
+    }
+
+    private String convertMDFHex(String mdf) {
+        int decimal;
+        String hexStr = "";
+        String mdffour = "";
+        String mdfString = "";
+
+        for(int i = 0; i < mdf.length(); i = i + 4){
+            mdffour = "";
+            hexStr = "";
+            for(int k = 0; k < 4 ; k++){
+                mdffour = mdffour + mdf.charAt(i+k);
+            }
+            decimal = Integer.parseInt(mdffour,2);
+            hexStr = Integer.toString(decimal,16);
+            mdfString = mdfString + hexStr;
+        }
+        return mdfString;
+    }
+
+
+    public void maptest(String str){
+        String mapdesriptor = pref.getString("AMDMDF",str);
+        String curr;
+        String mdf = "",mdfbin;
+        for(int j = 0; j < 75; j++){
+            curr = String.valueOf(mapdesriptor.charAt(j));
+            mdfbin = new BigInteger(curr,16).toString(2);
+            if(mdfbin.length() == 1)
+                mdfbin = "000" + mdfbin;
+            if(mdfbin.length() == 2)
+                mdfbin = "00" + mdfbin;
+            if(mdfbin.length() == 3)
+                mdfbin = "0" + mdfbin;
+            mdf = mdf + mdfbin;
+        }
+        Log.d("Maze",mdf);
+        //Plot Map
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
+            }
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
+        }
+    }
+
+    public void maptest2(String str){
+        String mapdesriptor = pref.getString("AMDMDF",str);
+        String curr;
+//        String mdf = "",mdfbin;
+//        for(int j = 0; j < 75; j++){
+//            curr = String.valueOf(mapdesriptor.charAt(j));
+//            mdfbin = new BigInteger(curr,16).toString(2);
+//            if(mdfbin.length() == 1)
+//                mdfbin = "000" + mdfbin;
+//            if(mdfbin.length() == 2)
+//                mdfbin = "00" + mdfbin;
+//            if(mdfbin.length() == 3)
+//                mdfbin = "0" + mdfbin;
+//            mdf = mdf + mdfbin;
+//        }
+//        Log.d("Maze",mdf);
+        //Plot Map
+        String mdf = mapdesriptor;
+        int column = 19, row = 0;
+        for(int k = 0; k < mdf.length(); k++){
+            curr = String.valueOf(mdf.charAt(k));
+            if(curr.equals("2")){
+                MainActivity.mazeManager.setGrid(row,column,"Unexplored");
+            }
+            else if(curr.equals("1")){
+                MainActivity.mazeManager.setGrid(row,column,"Obstacle");
+
+            }
+            else{
+                MainActivity.mazeManager.setGrid(row,column,"Empty");
+
+            }
+            row++;
+            if(row > 14){
+                row = 0;
+                column--;
+            }
+        }
+    }
 
 
     /* Here is ON OFF BLUETOOTH */
@@ -174,7 +508,17 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         }
         if (mBluetoothAdapter.isEnabled()) {
             Log.d(TAG,"enableDisableBT: disabling BT");
-            mBluetoothAdapter.disable();
+            if(mBluetoothAdapter.isDiscovering()){
+                mBluetoothAdapter.cancelDiscovery();
+            }
+            if(mBluetoothConnection != null){
+                mBluetoothConnection.closeeverything();
+            }
+
+            if(mBluetoothAdapter != null){
+                mBluetoothAdapter.disable();
+            }
+
 
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             requireActivity().registerReceiver(receiver,BTIntent);
@@ -236,7 +580,9 @@ public class BluetoothDialog extends AppCompatDialogFragment {
             if(action.equals(BluetoothDevice.ACTION_FOUND)){
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if(device.getName() != null){
-                    mBTDevices.add(device);
+                    if(device.getName().equals("rpi-grp-15") || device.getName().equals("DESKTOP-42ULPT8")) {
+                        mBTDevices.add(device);
+                    }
                 }
                 Log.d(TAG,"onReceive: " + device.getName() + ": " + device.getAddress());
                 mDeviceListAdapter = new DeviceListAdapter(context,R.layout.device_adapter_view,mBTDevices);
@@ -244,8 +590,6 @@ public class BluetoothDialog extends AppCompatDialogFragment {
             }
         }
     };
-
-
 
     private void checkBTPermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
@@ -265,10 +609,19 @@ public class BluetoothDialog extends AppCompatDialogFragment {
         mBluetoothConnection.startClient(device,uuid);
     }
 
+    public void reconnectBT(){
+        mBluetoothConnection.startClient(mBTDevice,mdpUUID);
+    }
+
     public void senddata(String msg){
-        if(mBluetoothConnection.getConnection()){
-            mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+        Log.d("BTDIALOG","trying to send data");
+        if(mBluetoothConnection != null){
+            if(mBluetoothConnection.getConnection()){
+                Log.d("BTDIALOG","trying to sending data");
+                mBluetoothConnection.write(msg.getBytes(Charset.defaultCharset()));
+            }
         }
+
 
     }
 }

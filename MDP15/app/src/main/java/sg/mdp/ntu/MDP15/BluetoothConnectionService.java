@@ -18,32 +18,61 @@ import java.util.UUID;
 
 public class BluetoothConnectionService {
     private static final String TAG = "BluetoothConnectionService";
-    private static final String appName = "MYAPP";
+    private static final String appName = "MDP 15 Tablet";
     static Handler mhandler; // handler that gets info from Bluetooth service
 
     private static final UUID mdpUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //private static final UUID mdpUUID = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb");
 
     private AcceptThread mInsecureAcceptThread;
     private ConnectThread mConnectThread;
     private BluetoothDevice mmDevice;
     private UUID deviceUUID;
     ProgressDialog mProgressDialog;
+    private BluetoothDialog btdialog;
 
     private ConnectedThread mConnectedThread;
 
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
 
-    public BluetoothConnectionService(Context context, Handler handler){
+    public BluetoothConnectionService(Context context, Handler handler, BluetoothDialog btdialog){
         mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mhandler = handler;
+        this.btdialog = btdialog;
         start();
     }
 
+    public void closeeverything(){
+        if(mConnectedThread.mmSocket != null){
+            try{
+                mConnectedThread.mmSocket.close();
+            }catch(IOException ex){
+
+            }
+        }
+
+//        if(mConnectThread.mmSocket != null){
+//            try{
+//                mConnectThread.mmSocket.close();
+//            }catch(IOException ex){
+//
+//            }
+//
+//        }
+    }
+
     public boolean getConnection(){
-        return  mConnectedThread.mmSocket.isConnected();
+        if(mConnectedThread != null){
+            if(mConnectedThread.mmSocket != null){
+                return  mConnectedThread.mmSocket.isConnected();
+            }
+            else {
+                System.out.println("No connection");
+                return false;
+            }
+        }
+        return false;
     }
 
     //this thread runs while listening for incoming connections.
@@ -183,7 +212,7 @@ public class BluetoothConnectionService {
     public void startClient(BluetoothDevice device, UUID uuid){
         Log.d(TAG,"startClient: started.");
 
-        mProgressDialog = ProgressDialog.show(mContext,"Connecting Bluetooth","Please wait...",true);
+       // mProgressDialog = ProgressDialog.show(mContext,"Connecting Bluetooth","Please wait...",true);
 
         mConnectThread = new ConnectThread(device,uuid);
         mConnectThread.start();
@@ -228,7 +257,7 @@ public class BluetoothConnectionService {
         }
 
         public void run(){
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
 
             int bytes;
 
@@ -236,13 +265,35 @@ public class BluetoothConnectionService {
                 try {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer,0,bytes);
+                    //System.out.println(incomingMessage);
                     Log.d(TAG,"InputStream: "+incomingMessage);
-                    mhandler.obtainMessage(1,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("STATUS"))
+                        mhandler.obtainMessage(1,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("RI")))
+                        mhandler.obtainMessage(3,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("MDF")))
+                        mhandler.obtainMessage(7,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("MDF1")))
+                        mhandler.obtainMessage(8,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains(("grid")))
+                        mhandler.obtainMessage(9,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("ID"))
+                        mhandler.obtainMessage(10,incomingMessage).sendToTarget();
+                    if(incomingMessage.contains("IR")){
+                        mhandler.obtainMessage(11,incomingMessage).sendToTarget();
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG,"write: Error reading to inputstream "+e.getMessage());
+                   //btdialog.startBTConnection(mmDevice,mdpUUID);
+                    disconnect();
+                    startNew();
                     break;
+
+                    //Bluetooth connection died.
+
+
                 }
             }
         }
@@ -262,6 +313,38 @@ public class BluetoothConnectionService {
                 mmSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        public synchronized void disconnect() {
+            if (mConnectedThread != null) {
+                mConnectedThread.cancel();
+                mConnectedThread = null;
+            }
+
+            if (mConnectThread != null) {
+                mConnectThread.cancel();
+                mConnectThread = null;
+            }
+
+            if (mInsecureAcceptThread != null) {
+                mInsecureAcceptThread.cancel();
+                mInsecureAcceptThread = null;
+            }
+        }
+
+        public synchronized  void startNew() {
+            Log.d(TAG, "start");
+
+            //Cancel any thread attempting to make a connection
+            if (mConnectThread != null) {
+                mConnectThread.cancel();
+                mConnectThread = null;
+            }
+            if (mInsecureAcceptThread == null) {
+                Log.e(TAG, "Creating a new accept thread...");
+                mInsecureAcceptThread = new AcceptThread();
+                mInsecureAcceptThread.start();
             }
         }
     }

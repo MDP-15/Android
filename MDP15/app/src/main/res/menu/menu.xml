@@ -14,5 +14,15 @@
         app:showAsAction="never"
         android:onClick="openReconfigure"
         />
+    <item
+        android:title="Motion Sensor"
+        android:id="@+id/btnMotion"
+        app:showAsAction="never"
+        android:onClick="motionONOFF"/>
+    <item
+        android:title="MDF and Images"
+        android:id="@+id/btnMDF"
+        app:showAsAction="never"
+        android:onClick="openMDFDialog"/>
 
 </menu>
